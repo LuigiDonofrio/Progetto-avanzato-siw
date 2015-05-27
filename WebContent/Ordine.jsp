@@ -8,8 +8,5 @@
 <title>Ordine</title>
 </head>
 <body>
-<% Ordine ordine = (Ordine)session.getAttribute("ordine"); 
-   out.println(ordine.getOrderLines().get(0).getProdotto().getName()); %>
-
 </body>
 </html>
