@@ -27,13 +27,19 @@ public class LoginController {
 		this.login = loginFacade.createLogin(username,password);
 		Utente user = this.loginFacade.validateLogin(this.login);
 		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		
-		if(user!=null){ 	
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		if(user!=null){		
 			request.getSession().setAttribute("currentUser", user);
-		message="OK!"; }else{ message="False!";}
-		return "Validation";
+			request.setAttribute("message", null);
+		}else{ 
+			
+			String errore=("<div class=\"alert alert-danger\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Error:</span>Hai inserito dei dati di login errati, riprova o registrati!</div>");
+			request.setAttribute("message", errore);
+		}
+		
+		return "index";
 		
 	}
 

@@ -19,18 +19,16 @@ public class LoginFacade {
 
 	public Utente validateLogin(Login login){
 
-		return (Utente) em.createQuery(
+		List<Utente> users= em.createQuery(
 
 				"select u from Utente u where u.nickname=:username and u.password=:password")
 
 				.setParameter("username", login.getUsername())
 
-				.setParameter("password", login.getPassword())
+				.setParameter("password", login.getPassword()).getResultList();
 
-				.getResultList().get(0);
-
-
-
+				if(users.size()!=0){return users.get(0);}else{return null;
+				}
 	}
 
 }

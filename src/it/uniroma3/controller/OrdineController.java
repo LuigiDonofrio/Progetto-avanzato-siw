@@ -34,9 +34,9 @@ public class OrdineController {
 	@EJB
 	private OrdineFacade ordineFacade;
 	
-	public String createOrdine() {
-		this.ordine = ordineFacade.createOrdine("a","CODE",productCode);
-	    return "product"; 
+	public String createOrdine(String productCodes) {
+		this.ordine = ordineFacade.createOrdine("a","CODE",productCodes);
+	    return "index"; 
 	}
 
 	public Long getId() {

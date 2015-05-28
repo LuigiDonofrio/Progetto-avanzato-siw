@@ -16,7 +16,7 @@ public class Interfaccia {
 	private String carrello;
 	private HttpServletRequest requestUI=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession sessionUI = requestUI.getSession();
-	
+
 	
 	public String getMessage(){
 	
@@ -29,7 +29,7 @@ public class Interfaccia {
 			bottoneLog= " <a href='"+this.requestUI.getContextPath()+"/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Logout</button></a>";
 			return messageWelcome+bottoneLog;
 		}else{
-			return " <a href='"+this.requestUI.getContextPath()+"/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Login</button></a>";
+			return " <a href='"+this.requestUI.getContextPath()+"/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Login</button></a> | Oppure <a href='"+this.requestUI.getContextPath()+"/faces/newUser.jsp'> registrati</a>";
 		}
 		
 	}
@@ -44,12 +44,13 @@ public class Interfaccia {
       				htmlGenerated=htmlGenerated+("<div class=\"panel-body\">");
 						
       	for(OrderLine orderline :ordine.getOrderLines()){
-      		htmlGenerated=htmlGenerated+("<a href='#' class=\"list-group-item\"><table width=\"100%\"><tr><td width=\"70%\" align=\"center\" >"+ orderline.getProdotto().getName()+"</td><td><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></td>");
+      		String nomeMaiusc = orderline.getProdotto().getName().substring(0, 1)+orderline.getProdotto().getName().substring(1);
+      		htmlGenerated=htmlGenerated+("<a href='#' class=\"list-group-item\"><table width=\"100%\"><tr><td width=\"70%\" align=\"center\" >"+ nomeMaiusc+"</td><td><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></td>");
       		htmlGenerated=htmlGenerated+("<td align=\"center\" width=\"30%\">"+(orderline.getQuantita())+"</td></tr></table></a>");
       		
       	}
+      	htmlGenerated = htmlGenerated+("</div></div>");
       	}
     return htmlGenerated;	
-	}
-		
+	}	
 	}
