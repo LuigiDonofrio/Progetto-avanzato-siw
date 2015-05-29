@@ -47,6 +47,9 @@ public class OrderLine {
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
+
+	public OrderLine() {
+	}
 	
 	
 }

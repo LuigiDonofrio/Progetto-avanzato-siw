@@ -4,7 +4,7 @@
 <%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en" xmlns:p="http://primefaces.org/ui">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,40 +34,37 @@
 </head>
 
 <body>
-<f:view>
-	<nav class="navbar navbar-fixed-top navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Project name</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href='<c:url value="/faces/newProduct.jsp" />'>New
-							Product</a></li>
-					<li>
-							<h:form>
+	<f:view>
+		<nav class="navbar navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Project name</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href='<c:url value="/faces/newProduct.jsp" />'>New
+								Product</a></li>
+						<li><h:form>
 								<h:commandLink styleClass="btn btn-default navbar-btn"
 									action="#{productController.listProducts}"
 									value="List all Products" />
-							</h:form>
-						</li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-				<div class="navbar-form navbar-right">
-					${interfaccia.message}
-
-					<div class="col-lg-6">
+							</h:form></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+					<div class="navbar-form navbar-right">
+						${interfaccia.message}
+						<div class="col-lg-6">
 							<h:form>
 								<div class="input-group">
-								
+
 									<h:inputText styleClass="form-control"
 										value="#{productController.name}" required="true"
 										requiredMessage="Name is mandatory" id="nome" />
@@ -80,64 +77,62 @@
 								</div>
 								<!-- /input-group -->
 							</h:form>
+						</div>
+						<!-- /.col-lg-6 -->
+
+
 					</div>
-					<!-- /.col-lg-6 -->
+
 
 
 				</div>
-
-
-
+				<!-- /.nav-collapse -->
 			</div>
-			<!-- /.nav-collapse -->
-		</div>
-		<!-- /.container -->
-	</nav>
-	<!-- /.navbar -->
+			<!-- /.container -->
+		</nav>
+		<!-- /.navbar -->
 
-	<div class="container">
+		<div class="container">
 
-		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="row row-offcanvas row-offcanvas-right">
 
-			<div class="col-xs-12 col-sm-9">
-				<p class="pull-right visible-xs">
-					<button type="button" class="btn btn-primary btn-xs"
-						data-toggle="offcanvas">Toggle nav</button>
-				</p>
-				${message}
-				<div class="jumbotron">
-					<h1>Benvenuto!</h1>
-					<p>Questa e' la pagina iniziale.</p>
-					
-					<p:inputText></p:inputText>
+				<div class="col-xs-12 col-sm-9">
+					<p class="pull-right visible-xs">
+						<button type="button" class="btn btn-primary btn-xs"
+							data-toggle="offcanvas">Toggle nav</button>
+					</p>
+					${message}
+					<div class="jumbotron">
+						<h1>Benvenuto!</h1>
+						<p>Questa e' la pagina iniziale.</p>
+
+					</div>
 
 				</div>
-
+				${interfaccia.carrello}
 			</div>
-			${interfaccia.carrello}
+
+			<!--/row-->
+
 		</div>
-
-		<!--/row-->
-
-	</div>
-	<hr>
-	<footer>
-		<p>&copy; Company 2014</p>
-	</footer>
-	<!--/.container-->
+		<hr>
+		<footer>
+			<p>&copy; Company 2014</p>
+		</footer>
+		<!--/.container-->
 
 
-	<!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="js/ie10-viewport-bug-workaround.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="js/ie10-viewport-bug-workaround.js"></script>
 
-	<script src="js/offcanvas.js"></script>
+		<script src="js/offcanvas.js"></script>
 	</f:view>
 </body>
 </html>

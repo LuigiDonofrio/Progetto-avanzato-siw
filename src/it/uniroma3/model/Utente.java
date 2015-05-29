@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-//@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p") blabla
+//@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
 public class Utente {
 	
 	public Utente(String nickname, String name, String lastname, String password,
@@ -104,6 +104,9 @@ public class Utente {
 
 	public void setOrdini(List<Ordine> ordini) {
 		this.ordini = ordini;
+	}
+
+	public Utente() {
 	}
 
 }
