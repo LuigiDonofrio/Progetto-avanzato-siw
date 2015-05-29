@@ -27,8 +27,7 @@ public class LoginController {
 		this.login = loginFacade.createLogin(username,password);
 		Utente user = this.loginFacade.validateLogin(this.login);
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		
 		if(user!=null){		
 			request.getSession().setAttribute("currentUser", user);
