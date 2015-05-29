@@ -42,7 +42,7 @@
 						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 						aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
+						  	class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="#">Project name</a>
@@ -52,15 +52,18 @@
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href='<c:url value="/faces/newProduct.jsp" />'>New
 								Product</a></li>
-						<li><h:form>
+						<li>
+						<h:form>
 								<h:commandLink styleClass="btn btn-default navbar-btn"
 									action="#{productController.listProducts}"
 									value="List all Products" />
-							</h:form></li>
+							</h:form>
+							</li>
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 					<div class="navbar-form navbar-right">
 						${interfaccia.message}
+						
 						<div class="col-lg-6">
 							<h:form>
 								<div class="input-group">
@@ -107,6 +110,7 @@
 						<p>Questa e' la pagina iniziale.</p>
 
 					</div>
+
 
 				</div>
 				${interfaccia.carrello}
