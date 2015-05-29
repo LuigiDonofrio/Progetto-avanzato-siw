@@ -4,7 +4,6 @@ import it.uniroma3.model.Ordine;
 import it.uniroma3.model.OrdineFacade;
 import it.uniroma3.model.Product;
 import it.uniroma3.model.ProductFacade;
-import it.uniroma3.model.Utente;
 
 import java.util.List;
 
@@ -35,9 +34,8 @@ public class OrdineController {
 	@EJB
 	private OrdineFacade ordineFacade;
 	
-	
 	public String createOrdine(String productCodes) {
-		this.ordine = ordineFacade.createOrdine(productCodes);
+		this.ordine = ordineFacade.createOrdine("a","CODE",productCodes);
 	    return "index"; 
 	}
 

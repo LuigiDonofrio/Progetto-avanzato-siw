@@ -20,7 +20,6 @@ public class Ordine {
 	private Long id;
 	
 	@Column(nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String code;
 	
 	@ManyToOne
@@ -62,11 +61,9 @@ public class Ordine {
 		this.orderLines = orderLines;
 	}
 
-	public Ordine() {
-	}
-	
-	public Ordine(Utente utente) {
+	public Ordine(String code, Utente utente) {
 		super();
+		this.code = code;
 		this.utente = utente;
 		this.orderLines = new ArrayList<OrderLine>();
 	}
