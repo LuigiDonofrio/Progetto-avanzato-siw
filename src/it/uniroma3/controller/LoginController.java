@@ -18,6 +18,7 @@ public class LoginController {
 	private String password;
 	private Login login;
 	private String message;
+	private Boolean isAdmin;
 	
 	@EJB
 	private LoginFacade loginFacade;
@@ -90,6 +91,14 @@ public class LoginController {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

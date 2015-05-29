@@ -43,7 +43,7 @@
                      id="password"/> <h:message for="password" />
 		</div>
 		
-		<h:commandButton value="Submit"  action="#{utenteController.createUser}"/>	
+		<h:commandButton value="Submit"  action="#{utenteController.creaCliente}"/>	
 </h:form>
 </f:view>		
 		

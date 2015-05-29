@@ -4,9 +4,15 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 
 @Stateless
+@NamedQueries({
+	@NamedQuery(name = "findCliente", query = "select u from Cliente u where u.nickname=:username and u.password=:password"),
+	@NamedQuery(name = "findAmministratore", query = "select u from Amministratore u where u.nickname=:username and u.password=:password")
+})
 public class LoginFacade {
 
 	@PersistenceContext(unitName = "unit-progetto")
@@ -17,18 +23,19 @@ public class LoginFacade {
 		return login;
 	}
 
-	public Utente validateLogin(Login login){
+	public Utente validateLogin(Login login) {
 
-		List<Utente> users= em.createQuery(
-
-				"select u from Utente u where u.nickname=:username and u.password=:password")
-
+		List<Cliente> customers = em.createNamedQuery("findCliente")
 				.setParameter("username", login.getUsername())
+				.setParameter("password", login.getPassword())
+				.getResultList();
+				
+		List<Cliente> admins = em.createNamedQuery("findAmministratore")
+				.setParameter("username", login.getUsername())
+				.setParameter("password", login.getPassword())
+				.getResultList();
+		return null;
 
-				.setParameter("password", login.getPassword()).getResultList();
-
-				if(users.size()!=0){return users.get(0);}else{return null;
-				}
 	}
 
 }

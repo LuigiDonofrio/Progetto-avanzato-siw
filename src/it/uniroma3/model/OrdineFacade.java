@@ -26,7 +26,7 @@ public class OrdineFacade {
 				.setParameter("code", prodCode).getResultList();
 
 		if (request.getSession().getAttribute("ordine") == null) {
-			Ordine ordine = new Ordine(currentUser);
+			Ordine ordine = new Ordine((Cliente) currentUser);
 			OrderLine orderline = new OrderLine(product.get(0), 1);
 			ordine.addLinea(orderline);
 			request.getSession().setAttribute("ordine", ordine);

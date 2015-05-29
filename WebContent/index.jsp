@@ -107,7 +107,7 @@
 					${message}
 					<div class="jumbotron">
 						<h1>Benvenuto!</h1>
-						<p>Questa e' la pagina iniziale.</p>
+						<p>Questa &#232 la pagina iniziale.</p>
 
 					</div>
 

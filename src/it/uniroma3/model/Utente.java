@@ -1,33 +1,19 @@
 package it.uniroma3.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-@Entity
+@MappedSuperclass
 //@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
-public class Utente {
+public abstract class Utente {
 	
-	public Utente(String nickname, String name, String lastname, String password,
-			String address) {
-		super();
-		this.nickname = nickname;
-		this.name = name;
-		this.lastname = lastname;
-		this.password = password;
-		this.address = address;
-		this.ordini = new ArrayList<Ordine>();
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -43,13 +29,17 @@ public class Utente {
 	
 	@Column(nullable = false)
 	private String password;
-	
-	@Column(nullable = false)
-	private String address;
-	
-	@OneToMany(mappedBy = "utente")
-	private List<Ordine> ordini;
 
+	public Utente(String nickname, String name, String lastname, String password) {
+		this.nickname = nickname;
+		this.name = name;
+		this.lastname = lastname;
+		this.password = password;
+	}
+	
+	public Utente() {
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -88,25 +78,6 @@ public class Utente {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public List<Ordine> getOrdini() {
-		return ordini;
-	}
-
-	public void setOrdini(List<Ordine> ordini) {
-		this.ordini = ordini;
-	}
-
-	public Utente() {
 	}
 
 }

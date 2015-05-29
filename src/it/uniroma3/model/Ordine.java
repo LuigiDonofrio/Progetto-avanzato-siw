@@ -23,7 +23,7 @@ public class Ordine {
 	private String code;
 	
 	@ManyToOne
-	private Utente utente;
+	private Cliente cliente;
 	
 	@OneToMany 
 	@JoinColumn(name = "orders_id")
@@ -45,12 +45,12 @@ public class Ordine {
 		this.code = code;
 	}
 
-	public Utente getUtente() {
-		return utente;
+	public Utente getCliente() {
+		return cliente;
 	}
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public List<OrderLine> getOrderLines() {
@@ -64,9 +64,9 @@ public class Ordine {
 	public Ordine() {
 	}
 	
-	public Ordine(Utente utente) {
+	public Ordine(Cliente cliente) {
 		super();
-		this.utente = utente;
+		this.cliente = cliente;
 		this.orderLines = new ArrayList<OrderLine>();
 	}
 	public void addLinea(OrderLine line){

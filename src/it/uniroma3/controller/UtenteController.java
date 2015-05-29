@@ -4,7 +4,6 @@ import java.util.Map;
 
 import it.uniroma3.model.Ordine;
 
-import it.uniroma3.model.Utente;
 import it.uniroma3.model.UtenteFacade;
 
 import javax.ejb.EJB;
@@ -21,18 +20,20 @@ public class UtenteController {
 	private String lastname;
 	private String password;
 	private String address;
-	private Utente user;
 	private Map<String,Ordine> orders;
 	
 	@EJB
 	private UtenteFacade userFacade;
 	
-	
-	public String createUser(){
-		this.user = userFacade.createUser(nickname, name, lastname, password, address);
-		return "RegisteredUser";
+	private String creaCliente(){
+		userFacade.creaCliente(nickname, name, lastname, password, address);
+		return "index";
 	}
-
+	private String creaAmministratore(){
+		userFacade.creaAmministratore(nickname, name, lastname, password);
+		return "index";
+	}
+	
 	public Long getId() {
 		return id;
 	}

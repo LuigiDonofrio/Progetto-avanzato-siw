@@ -1,12 +1,8 @@
 package it.uniroma3.model;
 
-import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.persistence.PersistenceContext;
 
 @Named
-
 public class Login {
 
 

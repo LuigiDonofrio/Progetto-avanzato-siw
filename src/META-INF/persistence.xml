@@ -7,7 +7,8 @@
 		<jta-data-source>PostgreSQL Database</jta-data-source>
  	<!--  	<non-jta-data-source>PostgreSQL Database</non-jta-data-source> -->
 		<class>it.uniroma3.model.Product</class>
-		<class>it.uniroma3.model.Utente</class>
+		<class>it.uniroma3.model.Cliente</class>
+		<class>it.uniroma3.model.Amminstratore</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>
