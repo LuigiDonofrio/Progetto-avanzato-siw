@@ -2,9 +2,8 @@ package it.uniroma3.controller;
 
 import java.util.Map;
 
+import it.uniroma3.facade.UtenteFacade;
 import it.uniroma3.model.Ordine;
-
-import it.uniroma3.model.UtenteFacade;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -25,11 +24,12 @@ public class UtenteController {
 	@EJB
 	private UtenteFacade userFacade;
 	
-	private String creaCliente(){
+	public String creaCliente(){
 		userFacade.creaCliente(nickname, name, lastname, password, address);
 		return "index";
 	}
-	private String creaAmministratore(){
+	
+	public String creaAmministratore(){
 		userFacade.creaAmministratore(nickname, name, lastname, password);
 		return "index";
 	}

@@ -1,18 +1,15 @@
-package it.uniroma3.model;
+package it.uniroma3.facade;
+
+import it.uniroma3.model.Login;
+import it.uniroma3.model.Utente;
 
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-@NamedQueries({
-	@NamedQuery(name = "findCliente", query = "select u from Cliente u where u.nickname=:username and u.password=:password"),
-	@NamedQuery(name = "findAmministratore", query = "select u from Amministratore u where u.nickname=:username and u.password=:password")
-})
 public class LoginFacade {
 
 	@PersistenceContext(unitName = "unit-progetto")
@@ -23,19 +20,28 @@ public class LoginFacade {
 		return login;
 	}
 
-	public Utente validateLogin(Login login) {
+	public Utente validaLoginCliente(Login login) {
+		
+		List<Utente> customers = em.createNamedQuery("findCliente")
+				.setParameter("username", login.getUsername())
+				.setParameter("password", login.getPassword())
+				.getResultList();
 
-		List<Cliente> customers = em.createNamedQuery("findCliente")
-				.setParameter("username", login.getUsername())
-				.setParameter("password", login.getPassword())
-				.getResultList();
-				
-		List<Cliente> admins = em.createNamedQuery("findAmministratore")
-				.setParameter("username", login.getUsername())
-				.setParameter("password", login.getPassword())
-				.getResultList();
-		return null;
+		System.out.println("Customers " + customers.size());
+		return customers.get(0);
 
 	}
 
+	public Utente validaLoginAmministratore(Login login) {
+				
+		List<Utente> admins = em.createNamedQuery("findAmministratore")
+				.setParameter("username", login.getUsername())
+				.setParameter("password", login.getPassword())
+				.getResultList();
+		
+		System.out.println("Admins " + admins.size());
+		return admins.get(0);
+
+	}
+	
 }

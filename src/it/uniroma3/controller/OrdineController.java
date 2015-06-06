@@ -1,22 +1,14 @@
 package it.uniroma3.controller;
 
+import it.uniroma3.facade.OrdineFacade;
 import it.uniroma3.model.Ordine;
-import it.uniroma3.model.OrdineFacade;
 import it.uniroma3.model.Product;
-import it.uniroma3.model.ProductFacade;
-import it.uniroma3.model.Utente;
 
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.FacesContext;
-import javax.jms.Session;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.catalina.core.ApplicationContext;
-import org.apache.openejb.server.httpd.HttpSession;
 
 @ManagedBean
 public class OrdineController {

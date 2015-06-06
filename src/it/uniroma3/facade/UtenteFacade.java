@@ -1,13 +1,14 @@
-package it.uniroma3.model;
+package it.uniroma3.facade;
+
+import it.uniroma3.model.Amministratore;
+import it.uniroma3.model.Cliente;
+import it.uniroma3.model.Utente;
 
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
-
-
 @Stateless
 public class UtenteFacade {
 
@@ -27,12 +28,12 @@ public class UtenteFacade {
 	}
 
 	public Utente srcUser(String nickname){
-		System.out.println("Arrivo prima");
+		//System.out.println("Arrivo prima");
 		System.out.println(em.createQuery("select u from Utente u where u.nickname=:username").toString());
-		List<Utente> users = em.createQuery("select u from Utente u where u.nickname=:username")
+		List<?> users = em.createQuery("select u from Utente u where u.nickname=:username")
 				.setParameter("username",nickname).getResultList();
-			System.out.println("Arrivo dopo");
-			return users.get(0);
+			//System.out.println("Arrivo dopo");
+			return (Utente) users.get(0);
 
 		}
 	}

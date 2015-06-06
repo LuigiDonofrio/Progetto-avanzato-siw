@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Product</title>
+<title>Benvenuto</title>
 </head>
 <body>
-<center><strong>Benvenuto:</strong>
+<center><strong>Benvenuto</strong>
 ${sessionScope.currentUser.name} ${sessionScope.currentUser.lastname} </center>
 </body>
 </html>

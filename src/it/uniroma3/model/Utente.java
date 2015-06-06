@@ -1,17 +1,12 @@
 package it.uniroma3.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 @MappedSuperclass
-//@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
 public abstract class Utente {
 	
 	@Id

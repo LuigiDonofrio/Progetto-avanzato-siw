@@ -1,9 +1,8 @@
-package it.uniroma3.controller;
+package it.uniroma3.interfaccia;
 
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Ordine;
 import it.uniroma3.model.Utente;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpSession;
 
 @SessionScoped
 @ManagedBean
-public class Interfaccia {
-	private String message;
-	private String carrello;
+public class Index {
 	private HttpServletRequest requestUI = (HttpServletRequest) FacesContext
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession sessionUI = requestUI.getSession();

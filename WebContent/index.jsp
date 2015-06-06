@@ -113,7 +113,7 @@
 
 
 				</div>
-				${interfaccia.carrello}
+				${index.carrello}
 			</div>
 
 			<!--/row-->

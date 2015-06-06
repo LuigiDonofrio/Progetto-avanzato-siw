@@ -48,13 +48,10 @@
 					<h:inputText id="password" value="#{loginController.password}"
 						styleClass="form-control" />
 					<h:selectBooleanCheckbox value="#{loginController.isAdmin}" id="isAdmin"/> Login come Admin?
-					</div>
-
-
 					<h:commandButton value="Login"
 						action="#{loginController.loginUtente}"
 						styleClass="btn btn-lg btn-primary btn-block" />
-
+					</div>
 				</h:form>
 			</f:view>
 	</div>

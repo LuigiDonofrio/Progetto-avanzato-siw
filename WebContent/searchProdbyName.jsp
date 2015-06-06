@@ -8,7 +8,7 @@
 <title>Cerca prodotto per nome</title>
 </head>
 <body>
-<h1>Cerca prodotti per nome</h1>
+<h1>Cerca prodotto per nome</h1>
 
 <f:view>
 	<h:form>

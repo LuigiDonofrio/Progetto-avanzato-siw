@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQuery(name = "findCliente", query = "select u from Cliente u where u.nickname=:username and u.password=:password")
 public class Cliente extends Utente {
 	
 	@Column(nullable = false)
@@ -21,7 +23,6 @@ public class Cliente extends Utente {
 		super(nickname, name, lastname, password);
 		this.address = address;
 		this.ordini = new ArrayList<Ordine>();
-		
 	}
 	
 	public Cliente(){

@@ -1,4 +1,10 @@
-package it.uniroma3.model;
+package it.uniroma3.facade;
+
+import it.uniroma3.model.Cliente;
+import it.uniroma3.model.OrderLine;
+import it.uniroma3.model.Ordine;
+import it.uniroma3.model.Product;
+import it.uniroma3.model.Utente;
 
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
