@@ -34,6 +34,7 @@ public class OrdineFacade {
 		if (request.getSession().getAttribute("ordine") == null) {
 			Ordine ordine = new Ordine((Cliente) currentUser);
 			OrderLine orderline = new OrderLine(product.get(0), 1);
+			orderline.setOrdine(ordine);
 			ordine.addLinea(orderline);
 			request.getSession().setAttribute("ordine", ordine);
 			return ordine;
@@ -51,11 +52,44 @@ public class OrdineFacade {
 			}
 
 			OrderLine orderline = new OrderLine(product.get(0), 1);
+			orderline.setOrdine(ordine);
 			ordine.addLinea(orderline);
 			request.getSession().setAttribute("ordine", ordine);
 
 			return ordine;
 		}
+	}
+
+	public void registraOrdine() {
+		System.out.println("Sono entrato nella registrazione");
+		HttpServletRequest request = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();	
+		em.persist(request.getSession().getAttribute("ordine"));
+		
+	}
+
+	public List<Ordine> getOrdiniCliente() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();	
+		Cliente c = (Cliente) request.getSession().getAttribute("currentUser");
+		System.out.println(c.getId());
+		List<Ordine> ordini = em.createQuery("select o from Ordine o where o.cliente=:cliente").setParameter("cliente",c).getResultList();
+		System.out.println(ordini.toString());
+		return ordini;
+	}
+
+	public Ordine getOrdine(Long id) {
+		Ordine ordine = em.find(Ordine.class, id);
+		return ordine;
+	}
+
+	public List<OrderLine> getRigheOrdine(Ordine ordine) {
+		List<OrderLine> righe = em.createQuery("select o from OrderLine o where o.ordine=:ord").setParameter("ord", ordine).getResultList();
+		System.out.println("Dimensione: "+righe.size());
+		OrderLine riga= (OrderLine)righe.get(0);
+		System.out.println(riga.getProdotto().getName());
+		
+		return righe;
 	}
 
 }

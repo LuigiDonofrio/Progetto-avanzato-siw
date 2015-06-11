@@ -42,45 +42,28 @@
 						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 						aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
+						  	class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">BuyMentor</a>
+					<a class="navbar-brand" href="#">Project name</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-
-						<li><h:form>
-
-								<h:outputLink styleClass="btn btn-link navbar-btn"
-									value='#{request.contextPath}/faces/newProduct.jsp' rendered="#{utenteController.showAdminOps}">Aggiungi prodotto </h:outputLink>
-
-								<h:commandLink styleClass="btn btn-link navbar-btn"
-									action="#{ordineController.listOrdini}"
-									value="Tutti gli ordini" rendered="#{utenteController.showAdminOps}" />
-
-								<h:commandLink styleClass="btn btn-link navbar-btn"
+						<li><a href='<c:url value="/faces/newProduct.jsp" />'>New
+								Product</a></li>
+						<li>
+						<h:form>
+								<h:commandLink styleClass="btn btn-default navbar-btn"
 									action="#{productController.listProducts}"
-									value="Tutti i prodotti" />
-
-								<h:commandLink styleClass="btn btn-link navbar-btn"
-									action="#{ordineController.prendiOrdiniCliente}"
-									value="I miei Ordini" rendered="#{utenteController.showOrdini}" />
-
-
-
-
-
-
-
-
-							</h:form></li>
+									value="List all Products" />
+							</h:form>
+							</li>
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 					<div class="navbar-form navbar-right">
 						${index.message}
-
+						
 						<div class="col-lg-6">
 							<h:form>
 								<div class="input-group">
@@ -123,8 +106,10 @@
 					</p>
 					${message}
 					<div class="jumbotron">
-						<h1>Benvenuto!</h1>
-						<p>Questa &#232 la pagina iniziale.</p>
+						<p><b>Riepilogo Acquisti</b></p>
+						${index.riepilogo}
+						<h:form><h:commandButton styleClass="btn btn-default"
+											action="#{ordineController.registraOrdine}" value="Conferma Ordine" ></h:commandButton></h:form>
 					</div>
 
 
@@ -156,9 +141,4 @@
 	</f:view>
 </body>
 </html>
-
-
-
-
-
 

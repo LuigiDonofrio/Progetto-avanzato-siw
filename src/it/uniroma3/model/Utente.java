@@ -74,5 +74,14 @@ public abstract class Utente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public boolean isAdmin(){
+		String utenteTipo = this.getClass().getName();
+		if(utenteTipo.contains("Amministratore")){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }

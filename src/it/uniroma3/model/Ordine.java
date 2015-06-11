@@ -2,7 +2,9 @@ package it.uniroma3.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +27,11 @@ public class Ordine {
 	@ManyToOne
 	private Cliente cliente;
 	
-	@OneToMany 
-	@JoinColumn(name = "orders_id")
+	@Column(nullable=false)
+	private int status;
+	
+	@OneToMany (cascade = CascadeType.PERSIST, mappedBy="ordine")
+	//@JoinColumn(name = "orders_id", referencedColumnName="id")
     private List<OrderLine> orderLines;
 
 	public Long getId() {

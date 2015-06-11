@@ -1,8 +1,12 @@
 package it.uniroma3.interfaccia;
 
+import it.uniroma3.controller.UtenteController;
+import it.uniroma3.facade.UtenteFacade;
+import it.uniroma3.model.Cliente;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Ordine;
 import it.uniroma3.model.Utente;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -16,6 +20,20 @@ public class Index {
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession sessionUI = requestUI.getSession();
 
+	public String getPannello(){
+
+		Utente utente = (Utente)this.sessionUI.getAttribute("currentUser");
+		String html="";
+		if(utente!=null){
+			if(utente.isAdmin()){
+				return "Amministratore";
+			}else{
+				return "Cliente";
+			}
+		}
+		return null;
+	}
+
 	public String getMessage() {
 
 		String messageWelcome = "/faces/loginUser.jsp";
@@ -27,12 +45,12 @@ public class Index {
 					+ u.getName() + "</font>");
 			bottoneLog = " <a href='"
 					+ this.requestUI.getContextPath()
-					+ "/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Logout</button></a>";
+					+ "/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Logout</a>";
 			return messageWelcome + bottoneLog;
 		} else {
 			return " <a href='"
 					+ this.requestUI.getContextPath()
-					+ "/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Login</button></a> | Oppure <a href='"
+					+ "/faces/loginUser.jsp' class=\"btn btn-success\" role=\"button\">Login</a> | Oppure <a href='"
 					+ this.requestUI.getContextPath()
 					+ "/faces/registraCliente.jsp'> Registrati</a>";
 		}
@@ -61,8 +79,31 @@ public class Index {
 								+ (orderline.getQuantita()) + "</td></tr></table></a>");
 
 			}
-			htmlGenerated = htmlGenerated + ("</div></div>");
+			htmlGenerated = htmlGenerated + ("</div><a href=\"faces/riepilogoOrdine.jsp\" class=\"btn btn-success\" role=\"button\">Conferma</a></div>");
 		}
 		return htmlGenerated;
+	}
+
+
+	public String getRiepilogo(){
+		Ordine ordine = (Ordine)this.sessionUI.getAttribute("ordine");
+		String htmlGen = "";
+		System.out.println();
+		if(ordine!=null){
+			htmlGen="<table width=\"100%\"><tr><td><b>Nome Prodotto<b></td><td><b>Quantita<b></td><td><b>Costo</td>";
+			for(OrderLine linea: ordine.getOrderLines()){
+				htmlGen = htmlGen
+						+"<tr><td width=\"70%\">"+linea.getProdotto().getName().substring(0, 1).toUpperCase()+linea.getProdotto().getName().substring(1)+"</td>"
+						+ "<td width=\"15%\" align=\"center\">"+linea.getQuantita()+"</td>"
+						+"<td width=\"15%\">"+linea.getQuantita()*linea.getProdotto().getPrice()+"</td>"
+						+ "</tr>";
+			}
+		}
+
+		return htmlGen+"</table>";
+	}
+	
+	public String getProva(){
+		return "<f:view><h:form><h:commandLink action=\"\" value=\"Peto\"/></h:form></f:view>";
 	}
 }

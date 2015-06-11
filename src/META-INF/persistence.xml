@@ -9,9 +9,13 @@
 		<class>it.uniroma3.model.Product</class>
 		<class>it.uniroma3.model.Cliente</class>
 		<class>it.uniroma3.model.Amminstratore</class>
+		<class>it.uniroma3.model.Ordine</class>
+		<class>it.uniroma3.model.OrderLine</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 		</properties>
 	</persistence-unit>
 </persistence>
+
           

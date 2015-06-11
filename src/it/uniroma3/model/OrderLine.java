@@ -2,9 +2,11 @@ package it.uniroma3.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 @Entity
 public class OrderLine {
@@ -12,9 +14,20 @@ public class OrderLine {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private Product prodotto;
 	
+	@ManyToOne
+	private Ordine ordine;
+	
+	public Ordine getOrdine() {
+		return ordine;
+	}
+
+	public void setOrdine(Ordine ordine) {
+		this.ordine = ordine;
+	}
+
 	@Column
 	private int quantita;
 
