@@ -20,14 +20,14 @@ public class Index {
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession sessionUI = requestUI.getSession();
 
-	public String getPannello(){
+	public String getPannello() {
 
-		Utente utente = (Utente)this.sessionUI.getAttribute("currentUser");
-		String html="";
-		if(utente!=null){
-			if(utente.isAdmin()){
+		Utente utente = (Utente) this.sessionUI.getAttribute("currentUser");
+		String html = "";
+		if (utente != null) {
+			if (utente.isAdmin()) {
 				return "Amministratore";
-			}else{
+			} else {
 				return "Cliente";
 			}
 		}
@@ -59,8 +59,7 @@ public class Index {
 
 	public String getCarrello() {
 		String htmlGenerated = "";
-		Ordine ordine = (Ordine) this.sessionUI.getAttribute(
-				"ordine");
+		Ordine ordine = (Ordine) this.sessionUI.getAttribute("ordine");
 		if (ordine != null) {
 			htmlGenerated = "<div class=\"col-xs-6 col-sm-3 sidebar-offcanvas\" id=\"sidebar\">";
 			htmlGenerated = htmlGenerated
@@ -79,31 +78,29 @@ public class Index {
 								+ (orderline.getQuantita()) + "</td></tr></table></a>");
 
 			}
-			htmlGenerated = htmlGenerated + ("</div><a href=\"faces/riepilogoOrdine.jsp\" class=\"btn btn-success\" role=\"button\">Conferma</a></div>");
 		}
 		return htmlGenerated;
 	}
 
-
-	public String getRiepilogo(){
-		Ordine ordine = (Ordine)this.sessionUI.getAttribute("ordine");
+	public String getRiepilogo() {
+		Ordine ordine = (Ordine) this.sessionUI.getAttribute("ordine");
 		String htmlGen = "";
 		System.out.println();
-		if(ordine!=null){
-			htmlGen="<table width=\"100%\"><tr><td><b>Nome Prodotto<b></td><td><b>Quantita<b></td><td><b>Costo</td>";
-			for(OrderLine linea: ordine.getOrderLines()){
+		if (ordine != null) {
+			htmlGen = "<table width=\"100%\"><tr><td><b>Nome Prodotto<b></td><td><b>Quantita<b></td><td><b>Costo</td>";
+			for (OrderLine linea : ordine.getOrderLines()) {
 				htmlGen = htmlGen
-						+"<tr><td width=\"70%\">"+linea.getProdotto().getName().substring(0, 1).toUpperCase()+linea.getProdotto().getName().substring(1)+"</td>"
-						+ "<td width=\"15%\" align=\"center\">"+linea.getQuantita()+"</td>"
-						+"<td width=\"15%\">"+linea.getQuantita()*linea.getProdotto().getPrice()+"</td>"
-						+ "</tr>";
+						+ "<tr><td width=\"70%\">"
+						+ linea.getProdotto().getName().substring(0, 1)
+								.toUpperCase()
+						+ linea.getProdotto().getName().substring(1) + "</td>"
+						+ "<td width=\"15%\" align=\"center\">"
+						+ linea.getQuantita() + "</td>" + "<td width=\"15%\">"
+						+ linea.getQuantita() * linea.getProdotto().getPrice()
+						+ "</td>" + "</tr>";
 			}
 		}
 
-		return htmlGen+"</table>";
-	}
-	
-	public String getProva(){
-		return "<f:view><h:form><h:commandLink action=\"\" value=\"Peto\"/></h:form></f:view>";
+		return htmlGen + "</table>";
 	}
 }

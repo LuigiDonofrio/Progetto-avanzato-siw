@@ -15,5 +15,9 @@ public class Amministratore extends Utente {
 	public Amministratore(){
 		super();
 	}
+	
+	public boolean isAdmin(){
+		return true;
+	}
 
 }

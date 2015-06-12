@@ -54,11 +54,13 @@
 						<li><h:form>
 
 								<h:outputLink styleClass="btn btn-link navbar-btn"
-									value='#{request.contextPath}/faces/newProduct.jsp' rendered="#{utenteController.showAdminOps}">Aggiungi prodotto </h:outputLink>
+									value='#{request.contextPath}/faces/newProduct.jsp'
+									rendered="#{utenteController.showAdminOps}">Aggiungi prodotto </h:outputLink>
 
 								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{ordineController.listOrdini}"
-									value="Tutti gli ordini" rendered="#{utenteController.showAdminOps}" />
+									value="Tutti gli ordini"
+									rendered="#{utenteController.showAdminOps}" />
 
 								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{productController.listProducts}"
@@ -99,12 +101,7 @@
 							</h:form>
 						</div>
 						<!-- /.col-lg-6 -->
-
-
 					</div>
-
-
-
 				</div>
 				<!-- /.nav-collapse -->
 			</div>
@@ -131,8 +128,12 @@
 				</div>
 				${index.carrello}
 			</div>
+			<a href= "faces/riepilogoOrdine.jsp" class="btn
+				btn-success" role="button">Conferma</a>
+		</div>
+			</div>
 
-			<!--/row-->
+		<!--/row-->
 
 		</div>
 		<hr>

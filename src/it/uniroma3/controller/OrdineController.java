@@ -41,9 +41,14 @@ public class OrdineController {
 	private OrdineFacade ordineFacade;
 	
 	
-	public String createOrdine(String productCodes) {
+	/*public String createOrdine(String productCodes) {
 		this.ordine = ordineFacade.createOrdine(productCodes);
 	    return "index"; 
+	}*/
+	
+	public String aggiungiProdotto(String productCode) {
+		ordineFacade.aggiungiProdotto(productCode);
+		return "index";
 	}
 	
 	public String prendiOrdiniCliente(){

@@ -22,20 +22,6 @@ public class UtenteController {
 	private Map<String,Ordine> orders;
 	private boolean showOrdini;
 	private boolean showAdminOps;
-	
-
-	public boolean isShowAdminOps() {
-		boolean isAdmin = userFacade.isCurrentUserAdmin();
-		return isAdmin;
-	}
-
-	public void setShowAdminOps(boolean showAdminOps) {
-		this.showAdminOps = showAdminOps;
-	}
-
-	public void setShowOrdini(boolean showOrdini) {
-		this.showOrdini = showOrdini;
-	}
 
 	@EJB
 	private UtenteFacade userFacade;
@@ -117,6 +103,19 @@ public class UtenteController {
 	public boolean isShowOrdini(){
 		boolean isAdmin = userFacade.isCurrentUserAdmin();
 		return !isAdmin;
+	}
+	
+	public boolean isShowAdminOps() {
+		boolean isAdmin = userFacade.isCurrentUserAdmin();
+		return isAdmin;
+	}
+
+	public void setShowAdminOps(boolean showAdminOps) {
+		this.showAdminOps = showAdminOps;
+	}
+
+	public void setShowOrdini(boolean showOrdini) {
+		this.showOrdini = showOrdini;
 	}
 
 }

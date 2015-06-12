@@ -8,20 +8,20 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class Utente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String nickname;
-	
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String lastname;
-	
+
 	@Column(nullable = false)
 	private String password;
 
@@ -31,10 +31,10 @@ public abstract class Utente {
 		this.lastname = lastname;
 		this.password = password;
 	}
-	
+
 	public Utente() {
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -74,14 +74,9 @@ public abstract class Utente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public boolean isAdmin(){
-		String utenteTipo = this.getClass().getName();
-		if(utenteTipo.contains("Amministratore")){
-			return true;
-		}else{
-			return false;
-		}
+		return false;
 	}
 
 }

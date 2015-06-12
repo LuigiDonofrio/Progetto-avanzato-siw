@@ -16,6 +16,10 @@ public class UtenteFacade {
 
 	@PersistenceContext(unitName = "unit-progetto")
 	private EntityManager em;
+	private HttpServletRequest request = (HttpServletRequest) FacesContext
+			.getCurrentInstance().getExternalContext().getRequest();
+	private Utente currentUser = (Utente) request.getSession().getAttribute(
+			"currentUser");
 
 	public Cliente creaCliente(String nickname, String name, String lastname, String password, String address) {
 		Cliente customer = new Cliente(nickname, name, lastname, password, address);
@@ -30,11 +34,9 @@ public class UtenteFacade {
 	}
 
 	public Utente srcUser(String nickname){
-		//System.out.println("Arrivo prima");
 		System.out.println(em.createQuery("select u from Utente u where u.nickname=:username").toString());
 		List<?> users = em.createQuery("select u from Utente u where u.nickname=:username")
 				.setParameter("username",nickname).getResultList();
-		//System.out.println("Arrivo dopo");
 		return (Utente) users.get(0);
 
 	}
@@ -48,10 +50,6 @@ public class UtenteFacade {
 	}
 
 	public boolean isCurrentUserAdmin() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();
-		Utente currentUser = (Utente) request.getSession().getAttribute(
-				"currentUser");
 		try{
 			return currentUser.isAdmin();
 		}catch(Exception e){

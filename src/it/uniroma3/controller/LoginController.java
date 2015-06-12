@@ -1,6 +1,7 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.facade.LoginFacade;
+import it.uniroma3.facade.OrdineFacade;
 import it.uniroma3.model.Login;
 import it.uniroma3.model.Utente;
 
@@ -43,6 +44,9 @@ public class LoginController {
 			request.setAttribute("message", errore);
 		}
 
+		if (!isAdmin)
+			OrdineFacade.createOrdine();
+			
 		return "index";
 
 	}
