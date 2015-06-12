@@ -1,17 +1,18 @@
 package it.uniroma3.model;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Ordine {
@@ -30,10 +31,18 @@ public class Ordine {
 	@Column(nullable=false)
 	private int status;
 	
-	@OneToMany (cascade = CascadeType.PERSIST, mappedBy="ordine")
-	//@JoinColumn(name = "orders_id", referencedColumnName="id")
+	@OneToMany (cascade = CascadeType.ALL, mappedBy="ordine")
     private List<OrderLine> orderLines;
-
+	
+	@Temporal (TemporalType.DATE)
+	private Date dataCreazione;
+	
+	@Temporal (TemporalType.DATE)
+	private Date dataPagamento;
+	
+	@Temporal (TemporalType.DATE)
+	private Date dataEvasione;
+	
 	public Long getId() {
 		return id;
 	}
@@ -73,6 +82,8 @@ public class Ordine {
 		super();
 		this.cliente = cliente;
 		this.orderLines = new ArrayList<OrderLine>();
+		this.dataCreazione = new Date();
+		System.out.println(dataCreazione.toString());
 	}
 	public void addLinea(OrderLine line){
 		this.orderLines.add(line);

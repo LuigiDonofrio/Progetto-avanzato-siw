@@ -3,14 +3,13 @@ package it.uniroma3.facade;
 import it.uniroma3.model.Amministratore;
 import it.uniroma3.model.Cliente;
 import it.uniroma3.model.Utente;
-
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
+
 @Stateless
 public class UtenteFacade {
 

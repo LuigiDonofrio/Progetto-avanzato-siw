@@ -26,8 +26,9 @@ public class LoginFacade {
 				.setParameter("username", login.getUsername())
 				.setParameter("password", login.getPassword())
 				.getResultList();
+
 		
-		if (customers.size()>0)
+		if (customers.size() > 0)
 		return customers.get(0);
 		else return null;
 
@@ -40,7 +41,7 @@ public class LoginFacade {
 				.setParameter("password", login.getPassword())
 				.getResultList();
 		
-		if (admins.size()>0)
+		if (admins.size() > 0)
 		return admins.get(0);
 		else return null;
 

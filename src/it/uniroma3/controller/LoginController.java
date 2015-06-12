@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @SessionScoped
 @ManagedBean
@@ -21,6 +22,11 @@ public class LoginController {
 	private String message;
 	private Boolean isAdmin;
 	private Utente user;
+	private boolean Logged;
+	
+	private HttpServletRequest request = (HttpServletRequest) FacesContext
+			.getCurrentInstance().getExternalContext().getRequest();
+	private HttpSession session = request.getSession();
 
 	@EJB
 	private LoginFacade loginFacade;
@@ -33,15 +39,14 @@ public class LoginController {
 		else
 			user = this.loginFacade.validaLoginCliente(this.login);
 
-		HttpServletRequest request = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();
+		
 
 		if (user != null) {
-			request.getSession().setAttribute("currentUser", user);
-			request.setAttribute("message", null);
+			this.session.setAttribute("currentUser", user);
+			this.request.setAttribute("message", null);
 		} else {
 			String errore = ("<div class=\"alert alert-danger\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Error:</span>Hai inserito dei dati di login errati, riprova o registrati!</div>");
-			request.setAttribute("message", errore);
+			this.request.setAttribute("message", errore);
 		}
 
 		if (!isAdmin)
@@ -49,6 +54,12 @@ public class LoginController {
 			
 		return "index";
 
+	}
+	
+	public String logout() {
+		this.session.invalidate();
+		this.session = request.getSession(true);
+	     return "index";
 	}
 
 	public String getUsername() {
@@ -97,6 +108,14 @@ public class LoginController {
 
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public boolean isLogged() {
+		return (this.session.getAttribute("currentUser") != null);
+	}
+
+	public void setLogged(boolean logged) {
+		Logged = logged;
 	}
 
 }

@@ -3,16 +3,12 @@ package it.uniroma3.controller;
 import it.uniroma3.facade.OrdineFacade;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Ordine;
-import it.uniroma3.model.Product;
 
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @ManagedBean
 public class OrdineController {

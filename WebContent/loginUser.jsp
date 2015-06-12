@@ -45,7 +45,7 @@
 
 					<h:outputLabel for="password">Password:</h:outputLabel>
 
-					<h:inputText id="password" value="#{loginController.password}"
+					<h:inputSecret id="password" value="#{loginController.password}"
 						styleClass="form-control" />
 					<h:selectBooleanCheckbox value="#{loginController.isAdmin}" id="isAdmin"/> Login come Admin?
 					<h:commandButton value="Login"

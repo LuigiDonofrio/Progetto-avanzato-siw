@@ -45,13 +45,27 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">BuyMentor</a>
+					<a class="navbar-brand active" href="#">BuyMentor</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-
 						<li><h:form>
+								<button class="btn btn-link navbar-btn dropdown-toggle"
+									type="button" id="dropdownMenu1" data-toggle="dropdown"
+									aria-expanded="true">
+									Dropdown <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu"
+									aria-labelledby="dropdownMenu1">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Another action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Something else here</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Separated link</a></li>
+								</ul>
 
 								<h:outputLink styleClass="btn btn-link navbar-btn"
 									value='#{request.contextPath}/faces/newProduct.jsp'
@@ -69,22 +83,19 @@
 								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{ordineController.prendiOrdiniCliente}"
 									value="I miei Ordini" rendered="#{utenteController.showOrdini}" />
-
-
-
-
-
-
-
-
 							</h:form></li>
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 					<div class="navbar-form navbar-right">
-						${index.message}
-
-						<div class="col-lg-6">
-							<h:form>
+						<!-- ${index.message} -->
+						<span style="float: left;"><h:form>
+								<h:outputLink value='#{request.contextPath}/faces/loginUser.jsp'
+									styleClass="btn btn-success" rendered="#{!loginController.logged}">Login</h:outputLink>
+								<h:commandLink action="#{loginController.logout}" value="Logout"
+									styleClass="btn btn-success" rendered="#{loginController.logged}"/>
+								<h:outputLink value='#{request.contextPath}/faces/registraCliente.jsp'
+									styleClass="btn btn-link" rendered="#{!loginController.logged}">Registrati</h:outputLink>
+							</h:form></span> <span style="float: right;"><h:form>
 								<div class="input-group">
 
 									<h:inputText styleClass="form-control"
@@ -98,12 +109,11 @@
 
 								</div>
 								<!-- /input-group -->
-							</h:form>
-						</div>
-						<!-- /.col-lg-6 -->
+							</h:form></span>
 					</div>
 				</div>
-				<!-- /.nav-collapse -->
+			</div>
+			<!-- /.nav-collapse -->
 			</div>
 			<!-- /.container -->
 		</nav>
@@ -128,31 +138,26 @@
 				</div>
 				${index.carrello}
 			</div>
-			<a href= "faces/riepilogoOrdine.jsp" class="btn
-				btn-success" role="button">Conferma</a>
-		</div>
-			</div>
 
+		</div>
 		<!--/row-->
-
-		</div>
+		<h:form>
+			<h:commandLink styleClass="btn btn-success"
+				action="riepilogoOrdine.jsp" value="Conferma" />
+		</h:form>
 		<hr>
 		<footer>
 			<p>&copy; Company 2014</p>
 		</footer>
 		<!--/.container-->
-
-
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="js/ie10-viewport-bug-workaround.js"></script>
-
 		<script src="js/offcanvas.js"></script>
 	</f:view>
 </body>
