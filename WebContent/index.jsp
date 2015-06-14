@@ -38,25 +38,17 @@
 		<!-- Fixed navbar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<div class="navbar-header"><h:form>
-					<h:outputLink styleClass="navbar-brand" value='#{request.contextPath}/faces/index.jsp'>BuyMentor</h:outputLink></h:form>
+				<div class="navbar-header">
+					<h:form>
+						<h:outputLink styleClass="navbar-brand"
+							value='#{request.contextPath}/faces/index.jsp'>BuyMentor</h:outputLink>
+					</h:form>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><h:form>
 								<h:commandLink styleClass="btn btn-link navbar-btn"
-									action="#{productController.listProducts}"
-									value="Catalogo" />
-							</h:form></li>
-						<li><h:form>
-								<h:commandLink styleClass="btn btn-link navbar-btn"
-									action="#{ordineController.listOrdini}"
-									value="Tutti gli ordini" />
-							</h:form></li>
-						<li><h:form>
-								<h:commandLink styleClass="btn btn-link navbar-btn"
-									action="#{ordineController.prendiOrdiniCliente}"
-									value="I miei Ordini" />
+									action="#{productController.listProducts}" value="Catalogo prodotti" />
 							</h:form></li>
 					</ul>
 					<span class="nav navbar-form navbar-right"> <h:form>
@@ -66,15 +58,16 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.name} <span class="caret"></span>
+										${currentUser.nickname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
+									<li><h:commandLink
+											action="#{ordineController.prendiOrdiniCliente}"
+											value="Cronologia ordini" /></li>
 									<li class="divider"></li>
-									<li><a href="#">Separated link</a></li>
+									<li><h:commandLink action="#{loginController.logout}"
+											value="Logout" /></li>
 								</ul>
 							</div>
 							<div class="btn-group">
@@ -83,25 +76,35 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.name} <span class="caret"></span>
+										${currentUser.nickname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
 									<li><h:outputLink
-											value='#{request.contextPath}/faces/newProduct.jsp'>Aggiungi prodotto </h:outputLink></li>
+											value='#{request.contextPath}/faces/newProduct.jsp'>
+											Aggiungi prodotto </h:outputLink></li>
+											<li class="divider"></li>
 									<li><h:outputLink
-											value='#{request.contextPath}/faces/registraAmministratore.jsp'>Registra nuovo Admin </h:outputLink></li></li>
-									<li><a href="#">Something else here</a></li>
+											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
+											Registra nuovo Admin </h:outputLink></li>
+									<li><h:commandLink
+											action="#{utenteController.listClienti}"
+											value="Anagrafica Clienti" /></li>
+											<li class="divider"></li>
+									<li><h:commandLink styleClass="btn btn-link navbar-btn"
+											action="#{ordineController.listOrdini}"
+											value="Tutti gli ordini" /></li>
+									<li><h:commandLink
+											action="#{ordineController.evasioneOrdini}"
+											value="Ordini da evadere" /></li>
 									<li class="divider"></li>
-									<li><a href="#">Separated link</a></li>
+									<li><h:commandLink action="#{loginController.logout}"
+											value="Logout" /></li>
 								</ul>
 							</div>
 							<h:outputLink value='#{request.contextPath}/faces/loginUser.jsp'
 								styleClass="btn btn-success"
 								rendered="#{!utenteController.userLogged}">Login</h:outputLink>
-							<h:commandLink action="#{loginController.logout}" value="Logout"
-								styleClass="btn btn-success"
-								rendered="#{utenteController.userLogged}" />
 							<h:outputLink
 								value='#{request.contextPath}/faces/registraCliente.jsp'
 								styleClass="btn btn-link"

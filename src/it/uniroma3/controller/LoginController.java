@@ -54,8 +54,9 @@ public class LoginController {
 	}
 
 	public String logout() {
-		this.session.invalidate();
-		this.session = request.getSession(true);
+		this.session.removeAttribute("currentUser");
+		this.session.removeAttribute("ordine");
+		this.session.removeAttribute("message");
 		return "index";
 	}
 
