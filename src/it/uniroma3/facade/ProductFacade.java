@@ -1,5 +1,6 @@
 package it.uniroma3.facade;
 
+import it.uniroma3.model.Fornitore;
 import it.uniroma3.model.Product;
 
 import javax.ejb.Stateless;
@@ -114,4 +115,10 @@ public class ProductFacade {
 			emf.close();	
 		}
 */
+
+	public List<Fornitore> getFornitori(long id_p) {
+		Product p = em.find(Product.class, id_p);
+		List<Fornitore> forns = em.createQuery("select f from Fornitore f join f.prodotti p where p.id=:p_id").setParameter("p_id", p.getId()).getResultList();
+		return forns;
+	}
 }

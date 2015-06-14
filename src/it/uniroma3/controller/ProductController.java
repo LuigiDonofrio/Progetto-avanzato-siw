@@ -3,6 +3,7 @@ package it.uniroma3.controller;
 import java.util.List;
 
 import it.uniroma3.facade.ProductFacade;
+import it.uniroma3.model.Fornitore;
 import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
@@ -21,9 +22,28 @@ public class ProductController {
 	private String code;
 	private Product product;
 	private List<Product> products;
+	private long id_p;
+	private List<Fornitore> fornitori;
 	
+	public long getId_p() {
+		return id_p;
+	}
+
+	public void setId_p(long id_p) {
+		this.id_p = id_p;
+	}
+
+	public List<Fornitore> getFornitori() {
+		return fornitori;
+	}
+
+	public void setFornitori(List<Fornitore> fornitori) {
+		this.fornitori = fornitori;
+	}
+
 	@EJB
 	private ProductFacade productFacade;
+	
 	
 	public String createProduct() {
 		System.out.println("Versione "+FacesContext.class.getPackage().getImplementationVersion());
@@ -100,6 +120,7 @@ public class ProductController {
 	}
 
 	public List<Product> getProducts() {
+		this.fornitori = productFacade.getFornitori(this.id_p); //Qua si potrebbe impleentare un metodo getProdotto
 		return products;
 	}
 

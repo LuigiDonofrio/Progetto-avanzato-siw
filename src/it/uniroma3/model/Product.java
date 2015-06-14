@@ -1,9 +1,14 @@
 package it.uniroma3.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Column;
 
@@ -22,7 +27,9 @@ import javax.persistence.Column;
 	@Column(length = 2000)
 
 	private String description;
-
+	
+	@ManyToMany(mappedBy="prodotti")
+	private List<Fornitore> fornitori;
 	@Column(nullable = false)
 	private String code;
 	
@@ -34,6 +41,7 @@ import javax.persistence.Column;
         this.price = price;
         this.description = description;
         this.code = code;
+        this.fornitori = new ArrayList<Fornitore>();
 }
 
     //          Getters & Setters        
@@ -85,6 +93,18 @@ import javax.persistence.Column;
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Fornitore> getFornitori() {
+		return fornitori;
+	}
+
+	public void setFornitori(List<Fornitore> fornitori) {
+		this.fornitori = fornitori;
+	}
+	
+	public String toString(){
+		return this.name;
 	}
 	
 }
