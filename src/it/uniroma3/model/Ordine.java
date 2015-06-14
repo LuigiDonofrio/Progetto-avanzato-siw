@@ -43,6 +43,18 @@ public class Ordine {
 	@Temporal (TemporalType.DATE)
 	private Date dataEvasione;
 	
+	public Ordine() {
+	}
+	
+	public Ordine(Cliente cliente) {
+		super();
+		this.cliente = cliente;
+		this.orderLines = new ArrayList<OrderLine>();
+	}
+	public void addLinea(OrderLine line){
+		this.orderLines.add(line);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -75,18 +87,36 @@ public class Ordine {
 		this.orderLines = orderLines;
 	}
 
-	public Ordine() {
+	public int getStatus() {
+		return status;
 	}
-	
-	public Ordine(Cliente cliente) {
-		super();
-		this.cliente = cliente;
-		this.orderLines = new ArrayList<OrderLine>();
-		this.dataCreazione = new Date();
-		System.out.println(dataCreazione.toString());
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public void addLinea(OrderLine line){
-		this.orderLines.add(line);
+
+	public Date getDataCreazione() {
+		return dataCreazione;
+	}
+
+	public void setDataCreazione(Date dataCreazione) {
+		this.dataCreazione = dataCreazione;
+	}
+
+	public Date getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+
+	public Date getDataEvasione() {
+		return dataEvasione;
+	}
+
+	public void setDataEvasione(Date dataEvasione) {
+		this.dataEvasione = dataEvasione;
 	}
 
 }

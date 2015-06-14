@@ -1,8 +1,5 @@
 package it.uniroma3.interfaccia;
 
-import it.uniroma3.controller.UtenteController;
-import it.uniroma3.facade.UtenteFacade;
-import it.uniroma3.model.Cliente;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Ordine;
 import it.uniroma3.model.Utente;

@@ -4,38 +4,46 @@ import java.util.Map;
 
 import it.uniroma3.facade.UtenteFacade;
 import it.uniroma3.model.Ordine;
+import it.uniroma3.model.Utente;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
+@SessionScoped
 public class UtenteController {
-	
-	@ManagedProperty(value="#{param.id}")
+
+	private HttpServletRequest request = (HttpServletRequest) FacesContext
+			.getCurrentInstance().getExternalContext().getRequest();
+	private HttpSession session = request.getSession();
+
 	private Long id;
 	private String name;
 	private String nickname;
 	private String lastname;
 	private String password;
 	private String address;
-	private Map<String,Ordine> orders;
-	private boolean showOrdini;
-	private boolean showAdminOps;
+	private Map<String, Ordine> orders;
+	private boolean adminLogged;
+	private boolean userLogged;
 
 	@EJB
 	private UtenteFacade userFacade;
-	
-	public String creaCliente(){
+
+	public String creaCliente() {
 		userFacade.creaCliente(nickname, name, lastname, password, address);
 		return "index";
 	}
-	
-	public String creaAmministratore(){
+
+	public String creaAmministratore() {
 		userFacade.creaAmministratore(nickname, name, lastname, password);
 		return "index";
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -99,23 +107,26 @@ public class UtenteController {
 	public void setUserFacade(UtenteFacade userFacade) {
 		this.userFacade = userFacade;
 	}
-	
-	public boolean isShowOrdini(){
-		boolean isAdmin = userFacade.isCurrentUserAdmin();
-		return !isAdmin;
-	}
-	
-	public boolean isShowAdminOps() {
-		boolean isAdmin = userFacade.isCurrentUserAdmin();
-		return isAdmin;
+
+	public boolean isAdminLogged() {
+		try {
+			Utente user = (Utente) this.session.getAttribute("currentUser");
+			return user.isAdmin();
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void setShowAdminOps(boolean showAdminOps) {
-		this.showAdminOps = showAdminOps;
+	public void setAdminLogged(boolean adminLogged) {
+		this.adminLogged = adminLogged;
 	}
 
-	public void setShowOrdini(boolean showOrdini) {
-		this.showOrdini = showOrdini;
+	public boolean isUserLogged() {
+		return (this.session.getAttribute("currentUser") != null);
+	}
+
+	public void setUserLogged(boolean userLogged) {
+		this.adminLogged = userLogged;
 	}
 
 }

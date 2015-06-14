@@ -15,47 +15,43 @@ public class UtenteFacade {
 
 	@PersistenceContext(unitName = "unit-progetto")
 	private EntityManager em;
-	private HttpServletRequest request = (HttpServletRequest) FacesContext
-			.getCurrentInstance().getExternalContext().getRequest();
-	private Utente currentUser = (Utente) request.getSession().getAttribute(
-			"currentUser");
 
-	public Cliente creaCliente(String nickname, String name, String lastname, String password, String address) {
-		Cliente customer = new Cliente(nickname, name, lastname, password, address);
+	public Cliente creaCliente(String nickname, String name, String lastname,
+			String password, String address) {
+		Cliente customer = new Cliente(nickname, name, lastname, password,
+				address);
 		em.persist(customer);
 		return customer;
 	}
 
-	public Amministratore creaAmministratore(String nickname, String name, String lastname, String password) {
-		Amministratore admin = new Amministratore(nickname, name, lastname, password);
+	public Amministratore creaAmministratore(String nickname, String name,
+			String lastname, String password) {
+		Amministratore admin = new Amministratore(nickname, name, lastname,
+				password);
 		em.persist(admin);
 		return admin;
 	}
 
-	public Utente srcUser(String nickname){
-		System.out.println(em.createQuery("select u from Utente u where u.nickname=:username").toString());
-		List<?> users = em.createQuery("select u from Utente u where u.nickname=:username")
-				.setParameter("username",nickname).getResultList();
+	public Utente srcUser(String nickname) {
+		System.out
+				.println(em.createQuery(
+						"select u from Utente u where u.nickname=:username")
+						.toString());
+		List<?> users = em
+				.createQuery(
+						"select u from Utente u where u.nickname=:username")
+				.setParameter("username", nickname).getResultList();
 		return (Utente) users.get(0);
 
 	}
 
 	public void getOrdiniCliente(Cliente cliente) {
-		List<Cliente> users = em.createQuery("select c from Cliente c where c.nickname=:username")
-				.setParameter("username",cliente.getNickname())
+		List<Cliente> users = em
+				.createQuery(
+						"select c from Cliente c where c.nickname=:username")
+				.setParameter("username", cliente.getNickname())
 				.getResultList();
 
 		System.out.println("Ho eseguito la ricerca");
 	}
-
-	public boolean isCurrentUserAdmin() {
-		try{
-			return currentUser.isAdmin();
-		}catch(Exception e){
-			return false;			
-		}
-	}
 }
-
-
-

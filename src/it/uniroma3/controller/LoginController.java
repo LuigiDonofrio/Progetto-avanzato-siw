@@ -22,8 +22,7 @@ public class LoginController {
 	private String message;
 	private Boolean isAdmin;
 	private Utente user;
-	private boolean Logged;
-	
+
 	private HttpServletRequest request = (HttpServletRequest) FacesContext
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession session = request.getSession();
@@ -39,8 +38,6 @@ public class LoginController {
 		else
 			user = this.loginFacade.validaLoginCliente(this.login);
 
-		
-
 		if (user != null) {
 			this.session.setAttribute("currentUser", user);
 			this.request.setAttribute("message", null);
@@ -51,15 +48,15 @@ public class LoginController {
 
 		if (!isAdmin)
 			OrdineFacade.createOrdine();
-			
+
 		return "index";
 
 	}
-	
+
 	public String logout() {
 		this.session.invalidate();
 		this.session = request.getSession(true);
-	     return "index";
+		return "index";
 	}
 
 	public String getUsername() {
@@ -108,14 +105,6 @@ public class LoginController {
 
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
-	}
-
-	public boolean isLogged() {
-		return (this.session.getAttribute("currentUser") != null);
-	}
-
-	public void setLogged(boolean logged) {
-		Logged = logged;
 	}
 
 }

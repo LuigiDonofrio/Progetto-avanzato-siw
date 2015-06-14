@@ -35,89 +35,83 @@
 
 <body>
 	<f:view>
-		<nav class="navbar navbar-fixed-top navbar-inverse">
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand active" href="#">BuyMentor</a>
+				<div class="navbar-header"><h:form>
+					<h:outputLink styleClass="navbar-brand" value='#{request.contextPath}/faces/index.jsp'>BuyMentor</h:outputLink></h:form>
 				</div>
-				<div id="navbar" class="collapse navbar-collapse">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><h:form>
-								<button class="btn btn-link navbar-btn dropdown-toggle"
-									type="button" id="dropdownMenu1" data-toggle="dropdown"
-									aria-expanded="true">
-									Dropdown <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="dropdownMenu1">
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Another action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Something else here</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Separated link</a></li>
-								</ul>
-
-								<h:outputLink styleClass="btn btn-link navbar-btn"
-									value='#{request.contextPath}/faces/newProduct.jsp'
-									rendered="#{utenteController.showAdminOps}">Aggiungi prodotto </h:outputLink>
-
-								<h:commandLink styleClass="btn btn-link navbar-btn"
-									action="#{ordineController.listOrdini}"
-									value="Tutti gli ordini"
-									rendered="#{utenteController.showAdminOps}" />
-
 								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{productController.listProducts}"
-									value="Tutti i prodotti" />
-
+									value="Catalogo" />
+							</h:form></li>
+						<li><h:form>
+								<h:commandLink styleClass="btn btn-link navbar-btn"
+									action="#{ordineController.listOrdini}"
+									value="Tutti gli ordini" />
+							</h:form></li>
+						<li><h:form>
 								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{ordineController.prendiOrdiniCliente}"
-									value="I miei Ordini" rendered="#{utenteController.showOrdini}" />
+									value="I miei Ordini" />
 							</h:form></li>
-						<li><a href="#contact">Contact</a></li>
 					</ul>
-					<div class="navbar-form navbar-right">
-						<!-- ${index.message} -->
-						<span style="float: left;"><h:form>
-								<h:outputLink value='#{request.contextPath}/faces/loginUser.jsp'
-									styleClass="btn btn-success" rendered="#{!loginController.logged}">Login</h:outputLink>
-								<h:commandLink action="#{loginController.logout}" value="Logout"
-									styleClass="btn btn-success" rendered="#{loginController.logged}"/>
-								<h:outputLink value='#{request.contextPath}/faces/registraCliente.jsp'
-									styleClass="btn btn-link" rendered="#{!loginController.logged}">Registrati</h:outputLink>
-							</h:form></span> <span style="float: right;"><h:form>
-								<div class="input-group">
-
-									<h:inputText styleClass="form-control"
-										value="#{productController.name}" required="true"
-										requiredMessage="Name is mandatory" id="nome" />
-									<h:message for="nome" />
-									<span class="input-group-btn"> <h:commandButton
-											styleClass="btn btn-default"
-											action="#{productController.findProductbyName}" value="Cerca" />
-									</span>
-
-								</div>
-								<!-- /input-group -->
-							</h:form></span>
-					</div>
+					<span class="nav navbar-form navbar-right"> <h:form>
+							<div class="btn-group">
+								<h:panelGroup
+									rendered="#{utenteController.userLogged && !utenteController.adminLogged}">
+									<button type="button" class="btn btn-success dropdown-toggle"
+										data-toggle="dropdown" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+										${currentUser.name} <span class="caret"></span>
+									</button>
+								</h:panelGroup>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</div>
+							<div class="btn-group">
+								<h:panelGroup
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									<button type="button" class="btn btn-primary dropdown-toggle"
+										data-toggle="dropdown" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+										${currentUser.name} <span class="caret"></span>
+									</button>
+								</h:panelGroup>
+								<ul class="dropdown-menu" role="menu">
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newProduct.jsp'>Aggiungi prodotto </h:outputLink></li>
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/registraAmministratore.jsp'>Registra nuovo Admin </h:outputLink></li></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</div>
+							<h:outputLink value='#{request.contextPath}/faces/loginUser.jsp'
+								styleClass="btn btn-success"
+								rendered="#{!utenteController.userLogged}">Login</h:outputLink>
+							<h:commandLink action="#{loginController.logout}" value="Logout"
+								styleClass="btn btn-success"
+								rendered="#{utenteController.userLogged}" />
+							<h:outputLink
+								value='#{request.contextPath}/faces/registraCliente.jsp'
+								styleClass="btn btn-link"
+								rendered="#{!utenteController.userLogged}">Registrati</h:outputLink>
+						</h:form>
+					</span>
 				</div>
+				<!--/.nav-collapse -->
 			</div>
-			<!-- /.nav-collapse -->
-			</div>
-			<!-- /.container -->
 		</nav>
-		<!-- /.navbar -->
 
 		<div class="container">
 

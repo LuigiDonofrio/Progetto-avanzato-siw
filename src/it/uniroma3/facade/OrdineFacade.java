@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -87,7 +88,9 @@ public void registraOrdine() {
 	System.out.println("Sono entrato nella registrazione");
 	HttpServletRequest request = (HttpServletRequest) FacesContext
 			.getCurrentInstance().getExternalContext().getRequest();
-	em.persist(request.getSession().getAttribute("ordine"));
+	Ordine ordine = (Ordine) request.getSession().getAttribute("ordine");
+	ordine.setDataCreazione(new Date());
+	em.persist(ordine);
 
 }
 
