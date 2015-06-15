@@ -9,6 +9,9 @@ import it.uniroma3.model.Product;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 public class ProductController {
@@ -24,6 +27,14 @@ public class ProductController {
 	private List<Product> products;
 	@ManagedProperty(value="#{param.id_f}")
 	private String id_f;
+	
+	private HttpServletRequest request = (HttpServletRequest) FacesContext
+			.getCurrentInstance().getExternalContext().getRequest();
+	private HttpSession session = request.getSession();
+	
+	
+	
+	
 	public String getId_f() {
 		return id_f;
 	}
@@ -94,6 +105,7 @@ public class ProductController {
 	public String aggiungiFornitori() {
 		this.allFornitori = productFacade.getAllFornitori();
 		System.out.println("Il prodotto e': "+this.id);
+		this.session.setAttribute("idProdottoCorrente", this.id);
 		return "addFornitore";
 	}
 	

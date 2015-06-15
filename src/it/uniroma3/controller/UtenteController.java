@@ -56,6 +56,8 @@ public class UtenteController {
 		userFacade.creaAmministratore(nickname, name, lastname, password);
 		return "index";
 	}
+	
+
 
 	public Long getId() {
 		return id;

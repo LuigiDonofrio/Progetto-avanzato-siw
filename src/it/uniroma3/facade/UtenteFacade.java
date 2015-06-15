@@ -71,4 +71,8 @@ public class UtenteFacade {
 	public Cliente findCliente(Long id) {
 		return em.find(Cliente.class, id);
 	}
+
+	public List<Cliente> ottientiClientiDaApprovare() {
+		return em.createQuery("select c from Cliente c where c.approvato=:yes").setParameter("yes", false).getResultList();
+	}
 }

@@ -9,6 +9,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 public class FornitoreController {
@@ -22,12 +25,15 @@ public class FornitoreController {
 	private String email;
 	private long telefono;
 	private List<Product> prodotti;
-	@ManagedProperty(value = "#{param.id_p}")
 	private long id_p;
-	@ManagedProperty(value = "#{param.id_f}")
 	private long id_f;
 	private Fornitore fornitore;
 
+	private HttpServletRequest request = (HttpServletRequest) FacesContext
+			.getCurrentInstance().getExternalContext().getRequest();
+	private HttpSession session = request.getSession();
+	
+	
 	@EJB
 	private FornitoreFacade fornitoreFacade;
 
@@ -47,8 +53,8 @@ public class FornitoreController {
 	}
 
 	public String addProdotto() {
-		this.fornitore = fornitoreFacade.aggiungiProdotto(this.id_f, this.id_p);
-		this.fornitore = fornitoreFacade.getFornitore(id_f);
+		Long id_prodottoCorrente=(Long)this.session.getAttribute("idProdottoCorrente");
+		this.fornitore = fornitoreFacade.aggiungiProdotto(this.id, id_prodottoCorrente);
 		return "riepilogoFornitore";
 	}
 
