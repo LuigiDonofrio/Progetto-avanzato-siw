@@ -62,7 +62,6 @@ public class OrdineFacade {
 		Ordine ordine = (Ordine) request.getSession().getAttribute("ordine");
 		ordine.setDataChiusura(new Date());
 		em.persist(ordine);
-
 	}
 
 	public List<Ordine> getOrdiniCliente() {
@@ -106,7 +105,14 @@ public class OrdineFacade {
 	public List<Ordine> evadiOrdine(long id, Date date) {
 		Ordine ordine = em.find(Ordine.class, id);
 		ordine.setDataEvasione(date);
-		ordine.setStatus(1); // EVASO
+		ordine.setStatus(1);
+		List<OrderLine> orderlines = this.getRigheOrdine(ordine);
+		
+		for(OrderLine orderline: orderlines){		
+			Product prod = em.find(Product.class, orderline.getProdotto().getId());
+			prod.setQuantita(prod.getQuantita()-orderline.getQuantita());
+			em.merge(prod);
+		}
 		em.merge(ordine);
 		return this.findAllOrdiniNonEvasi();
 	}

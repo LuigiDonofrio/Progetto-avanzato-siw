@@ -11,17 +11,20 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 public class OrdineController {
 
+	private HttpServletRequest request = (HttpServletRequest) FacesContext
+			.getCurrentInstance().getExternalContext().getRequest();
+	private HttpSession session = request.getSession();
+
 	@ManagedProperty(value = "#{param.id}")
 	private Long id;
 	private String code;
-
-	public String getProductCode() {
-		return productCode;
-	}
 
 	private String productCode;
 	private Ordine ordine;
@@ -29,6 +32,7 @@ public class OrdineController {
 	private List<OrderLine> righe;
 	private Cliente cliente;
 	private Date dataEvasione;
+	private boolean valido;
 
 	@EJB
 	private OrdineFacade ordineFacade;
@@ -43,6 +47,11 @@ public class OrdineController {
 		return "allOrdini";
 	}
 
+	public String svuotaCarrello() {
+		OrdineFacade.createOrdine();
+		return "";
+	}
+	
 	public String evadiOrdine() {
 		this.ordini = ordineFacade.evadiOrdine(this.id, dataEvasione);
 		return "allOrdini";
@@ -72,8 +81,10 @@ public class OrdineController {
 		this.ordini = ordini;
 	}
 
-	public void registraOrdine() {
+	public String registraOrdine() {
 		ordineFacade.registraOrdine();
+		OrdineFacade.createOrdine();
+		return "index";
 	}
 
 	public Long getId() {
@@ -92,10 +103,10 @@ public class OrdineController {
 		this.code = code;
 	}
 
-	public String getProductode() {
+	public String getProductCode() {
 		return productCode;
 	}
-
+	
 	public void setProductCode(String product) {
 		this.productCode = product;
 	}
@@ -130,6 +141,19 @@ public class OrdineController {
 
 	public void setRighe(List<OrderLine> righeOrdine) {
 		this.righe = righeOrdine;
+	}
+
+	public boolean isValido() {
+		Ordine ordine = (Ordine) this.session.getAttribute("ordine");
+		try {
+		return (ordine.getOrderLines().size() > 0);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public void setValido(boolean valido) {
+		this.valido = valido;
 	}
 
 	public OrdineFacade getOrdineFacade() {

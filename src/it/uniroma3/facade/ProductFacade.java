@@ -115,6 +115,10 @@ public class ProductFacade {
 		}
 */
 
+	public List<Fornitore> getAllFornitori() {
+		return em.createQuery("select f from Fornitore f").getResultList();
+	}
+
 	/*public List<Fornitore> getFornitori(long id_p) {
 		Product p = em.find(Product.class, id_p);
 		List<Fornitore> forns = em.createQuery("select f from Fornitore f join f.prodotti p where p.id=:p_id").setParameter("p_id", p.getId()).getResultList();

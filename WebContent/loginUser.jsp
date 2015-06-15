@@ -52,7 +52,6 @@
 						styleClass="btn btn-lg btn-primary btn-block" />
 						<br>${message}
 				</h:form>
-				
 			</f:view>
 		</form>
 	</div>

@@ -35,110 +35,163 @@
 
 <body>
 	<f:view>
-		<nav class="navbar navbar-fixed-top navbar-inverse">
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span> <span
-						  	class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Project name</a>
+					<h:form>
+						<h:outputLink styleClass="navbar-brand"
+							value='#{request.contextPath}/faces/index.jsp'>BuyMentor</h:outputLink>
+					</h:form>
 				</div>
-				<div id="navbar" class="collapse navbar-collapse">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href='<c:url value="/faces/newProduct.jsp" />'>New
-								Product</a></li>
-						<li>
-						<h:form>
-								<h:commandLink styleClass="btn btn-default navbar-btn"
+						<li><h:form>
+								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{productController.listProducts}"
-									value="List all Products" />
-							</h:form>
-							</li>
-						<li><a href="#contact">Contact</a></li>
+									value="Catalogo prodotti" />
+							</h:form></li>
 					</ul>
-					<div class="navbar-form navbar-right">
-						${index.message}
-						
-						<div class="col-lg-6">
-							<h:form>
-								<div class="input-group">
-
-									<h:inputText styleClass="form-control"
-										value="#{productController.name}" required="true"
-										requiredMessage="Name is mandatory" id="nome" />
-									<h:message for="nome" />
-									<span class="input-group-btn"> <h:commandButton
-											styleClass="btn btn-default"
-											action="#{productController.findProductbyName}" value="Cerca" />
-									</span>
-
-								</div>
-								<!-- /input-group -->
-							</h:form>
-						</div>
-						<!-- /.col-lg-6 -->
-
-
-					</div>
-
-
-
+					<span class="nav navbar-form navbar-right"> <h:form>
+							<div class="btn-group">
+								<h:panelGroup
+									rendered="#{utenteController.userLogged && !utenteController.adminLogged}">
+									<button type="button" class="btn btn-success dropdown-toggle"
+										data-toggle="dropdown" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+										${currentUser.nickname} <span class="caret"></span>
+									</button>
+								</h:panelGroup>
+								<ul class="dropdown-menu" role="menu">
+									<li><h:commandLink
+											action="#{ordineController.prendiOrdiniCliente}"
+											value="Cronologia ordini" /></li>
+									<li class="divider"></li>
+									<li><h:commandLink action="#{loginController.logout}"
+											value="Logout" /></li>
+								</ul>
+							</div>
+							<div class="btn-group">
+								<h:panelGroup
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									<button type="button" class="btn btn-primary dropdown-toggle"
+										data-toggle="dropdown" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+										${currentUser.nickname} <span class="caret"></span>
+									</button>
+								</h:panelGroup>
+								<ul class="dropdown-menu" role="menu">
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newProduct.jsp'>
+											Aggiungi prodotto </h:outputLink></li>
+									<li class="divider"></li>
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
+											Registra nuovo Admin </h:outputLink></li>
+									<li class="divider"></li>
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newFornitore.jsp'>
+											Registra nuovo fornitore </h:outputLink></li>
+									<li><h:commandLink
+											action="#{utenteController.ottieniClienti}"
+											value="Anagrafica Clienti" /></li>
+									<li class="divider"></li>
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdini}"
+											value="Tutti gli ordini" /></li>
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdiniNonEvasi}"
+											value="Ordini da evadere" /></li>
+									<li class="divider"></li>
+									<li><h:commandLink action="#{loginController.logout}"
+											value="Logout" /></li>
+								</ul>
+							</div>
+							<h:outputLink value='#{request.contextPath}/faces/loginUser.jsp'
+								styleClass="btn btn-success"
+								rendered="#{!utenteController.userLogged}">Login</h:outputLink>
+							<h:outputLink
+								value='#{request.contextPath}/faces/registraCliente.jsp'
+								styleClass="btn btn-link"
+								rendered="#{!utenteController.userLogged}">Registrati</h:outputLink>
+						</h:form>
+					</span>
 				</div>
-				<!-- /.nav-collapse -->
+
 			</div>
-			<!-- /.container -->
 		</nav>
-		<!-- /.navbar -->
+		<!--/.nav-collapse -->
 
 		<div class="container">
-
 			<div class="row row-offcanvas row-offcanvas-right">
-
 				<div class="col-xs-12 col-sm-9">
 					<p class="pull-right visible-xs">
 						<button type="button" class="btn btn-primary btn-xs"
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
-					${message}
 					<div class="jumbotron">
-						<p><b>Riepilogo Acquisti</b></p>
-						${index.riepilogo}
-						<h:form><h:commandButton styleClass="btn btn-default"
-											action="#{ordineController.registraOrdine}" value="Conferma Ordine" ></h:commandButton></h:form>
+						<h2>Riepilogo ordine</h2>
+						<h:form>
+							<div class="panel panel-default">
+								<table class="table">
+									<tr>
+										<th>Codice prodotto</th>
+										<th>Nome prodotto</th>
+										<th>Prezzo</th>
+										<th>Quantit&#224</th>
+									</tr>
+									<c:forEach var="orderLine" items="${ordine.orderLines}">
+										<tr>
+											<td>${orderLine.prodotto.code}</td>
+											<td>${orderLine.prodotto.name}</td>
+											<td>${orderLine.prodotto.price}&#8364</td>
+											<td>${orderLine.quantita}</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+							<h:commandButton styleClass="btn btn-default"
+								action="#{ordineController.registraOrdine}"
+								value="Conferma Ordine"></h:commandButton>
+						</h:form>
 					</div>
-
-
 				</div>
-				${index.carrello}
+
+				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<table style="width: 100%">
+								<tr>
+									<td width="70%"><h3 class="panel-title">Carrello</h3></td>
+									<td width="30%" align="right"><span
+										class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
+										style="float: right"></span></td>
+								</tr>
+							</table>
+						</div>
+						<div class="panel-body">${index.carrello}</div>
+					</div>
+					<!--/panel-->
+				</div>
+				<!--/sidebar-->
+
+				<hr>
+				<footer>
+					<p>&copy; Company 2014</p>
+				</footer>
 			</div>
-
 			<!--/row-->
-
 		</div>
-		<hr>
-		<footer>
-			<p>&copy; Company 2014</p>
-		</footer>
 		<!--/.container-->
-
-
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="js/ie10-viewport-bug-workaround.js"></script>
-
 		<script src="js/offcanvas.js"></script>
 	</f:view>
 </body>
 </html>
-

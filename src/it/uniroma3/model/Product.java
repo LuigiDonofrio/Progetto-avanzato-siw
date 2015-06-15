@@ -45,6 +45,7 @@ import javax.persistence.Column;
         this.description = description;
         this.code = code;
         this.fornitori = new ArrayList<Fornitore>();
+        this.quantita = quantita;
 }
 
     //          Getters & Setters        

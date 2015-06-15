@@ -22,7 +22,9 @@ public class FornitoreController {
 	private String email;
 	private long telefono;
 	private List<Product> prodotti;
+	@ManagedProperty(value = "#{param.id_p}")
 	private long id_p;
+	@ManagedProperty(value = "#{param.id_f}")
 	private long id_f;
 	private Fornitore fornitore;
 
@@ -47,7 +49,6 @@ public class FornitoreController {
 	public String addProdotto() {
 		this.fornitore = fornitoreFacade.aggiungiProdotto(this.id_f, this.id_p);
 		this.fornitore = fornitoreFacade.getFornitore(id_f);
-		System.out.println(fornitoreFacade.getProdotti(id_f));
 		return "riepilogoFornitore";
 	}
 
@@ -63,8 +64,16 @@ public class FornitoreController {
 		return name;
 	}
 
-	public void setNome(String name) {
+	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public long getP_iva() {

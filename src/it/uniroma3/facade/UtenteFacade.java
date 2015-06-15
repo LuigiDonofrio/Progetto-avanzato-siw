@@ -61,6 +61,12 @@ public class UtenteFacade {
 				.getResultList();
 		return clienti;
 	}
+	
+	public List<Cliente> getClientiNonApprovati() {
+		List<Cliente> clienti = em.createQuery("select c From Cliente c where c.approvato=false").getResultList();
+		return clienti;
+	}
+
 
 	public Cliente findCliente(Long id) {
 		return em.find(Cliente.class, id);

@@ -22,9 +22,28 @@ public class ProductController {
 	private int quantita;
 	private Product product;
 	private List<Product> products;
+	@ManagedProperty(value="#{param.id_f}")
+	private String id_f;
+	public String getId_f() {
+		return id_f;
+	}
+
+	public void setId_f(String id_f) {
+		this.id_f = id_f;
+	}
+
 	private long id_p;
-	private List<Fornitore> fornitori;
+	private Long[] fornitori;
+	private List<Fornitore> allFornitori;
 	
+	public List<Fornitore> getAllFornitori() {
+		return allFornitori;
+	}
+
+	public void setAllFornitori(List<Fornitore> allFornitori) {
+		this.allFornitori = allFornitori;
+	}
+
 	public long getId_p() {
 		return id_p;
 	}
@@ -33,16 +52,17 @@ public class ProductController {
 		this.id_p = id_p;
 	}
 
-	public List<Fornitore> getFornitori() {
+	public Long[] getFornitori() {
 		return fornitori;
 	}
 
-	public void setFornitori(List<Fornitore> fornitori) {
+	public void setFornitori(Long[] fornitori) {
 		this.fornitori = fornitori;
 	}
 
 	@EJB
 	private ProductFacade productFacade;
+	
 	
 	
 	public String createProduct() {
@@ -57,6 +77,7 @@ public class ProductController {
 
 	public String findProduct() {
 		this.product = productFacade.getProduct(id);
+
 		return "product";
 	}
 	
@@ -68,6 +89,12 @@ public class ProductController {
 	public String findProductbyName() {
 		this.products = productFacade.searchProductbyName(this.name);
 		return "products";
+	}
+	
+	public String aggiungiFornitori() {
+		this.allFornitori = productFacade.getAllFornitori();
+		System.out.println("Il prodotto e': "+this.id);
+		return "addFornitore";
 	}
 	
 	public Long getId() {

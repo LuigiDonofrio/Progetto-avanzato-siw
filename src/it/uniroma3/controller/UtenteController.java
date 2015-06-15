@@ -2,11 +2,9 @@ package it.uniroma3.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import it.uniroma3.facade.UtenteFacade;
 import it.uniroma3.model.Cliente;
-import it.uniroma3.model.Ordine;
 import it.uniroma3.model.Utente;
 
 import javax.ejb.EJB;
@@ -157,6 +155,11 @@ public class UtenteController {
 
 	public String ottieniClienti() {
 		this.listClienti = userFacade.getAllClienti();
+		return "allClienti";
+	}
+	
+	public String ottieniClientiDaApprovare() {
+		this.listClienti = userFacade.getClientiNonApprovati();
 		return "allClienti";
 	}
 

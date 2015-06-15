@@ -88,15 +88,19 @@
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
 											Registra nuovo Admin </h:outputLink></li>
+									<li class="divider"></li>
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newFornitore.jsp'>
+											Registra nuovo fornitore </h:outputLink></li>
 									<li><h:commandLink
-											action="#{utenteController.listClienti}"
+											action="#{utenteController.ottieniClienti}"
 											value="Anagrafica Clienti" /></li>
 									<li class="divider"></li>
-									<li><h:commandLink styleClass="btn btn-link navbar-btn"
-											action="#{ordineController.listOrdini}"
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdini}"
 											value="Tutti gli ordini" /></li>
 									<li><h:commandLink
-											action="#{ordineController.evasioneOrdini}"
+											action="#{ordineController.ottieniOrdiniNonEvasi}"
 											value="Ordini da evadere" /></li>
 									<li class="divider"></li>
 									<li><h:commandLink action="#{loginController.logout}"
@@ -113,9 +117,11 @@
 						</h:form>
 					</span>
 				</div>
-				<!--/.nav-collapse -->
+				
 			</div>
 		</nav>
+		<!--/.nav-collapse -->
+		
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-right">
 				<div class="col-xs-12 col-sm-9">
@@ -124,7 +130,7 @@
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
 					<div class="jumbotron">
-						<h2>Registrazione amministratore</h2>
+						<h2>Registrazione fornitore</h2>
 						<h:form>
 							<div>
 								<h:outputLabel for="name">Nome</h:outputLabel>

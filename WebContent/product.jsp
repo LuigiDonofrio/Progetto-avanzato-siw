@@ -121,8 +121,14 @@
 							<h:form>
 								<c:set scope="session" var="code"
 									value="${productController.product.code}" />
-								<h:commandButton styleClass="btn btn-success" action="#{ordineController.aggiungiProdotto(code)}"
+								<h:commandButton styleClass="btn btn-success"
+									action="#{ordineController.aggiungiProdotto(code)}"
 									value="Aggiungi al carrello" />
+									
+								<h:commandButton styleClass="btn btn-success"
+									action="#{productController.aggiungiFornitori}"
+									value="Aggiungi fornitori">
+								<f:param name="id" value="#{productController.product.id}"/></h:commandButton>
 							</h:form>
 						</div>
 
