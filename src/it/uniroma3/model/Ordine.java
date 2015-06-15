@@ -35,10 +35,10 @@ public class Ordine {
     private List<OrderLine> orderLines;
 	
 	@Temporal (TemporalType.DATE)
-	private Date dataCreazione;
+	private Date dataApertura;
 	
 	@Temporal (TemporalType.DATE)
-	private Date dataPagamento;
+	private Date dataChiusura;
 	
 	@Temporal (TemporalType.DATE)
 	private Date dataEvasione;
@@ -95,20 +95,20 @@ public class Ordine {
 		this.status = status;
 	}
 
-	public Date getDataCreazione() {
-		return dataCreazione;
+	public Date getDataApertura() {
+		return dataApertura;
 	}
 
-	public void setDataCreazione(Date dataCreazione) {
-		this.dataCreazione = dataCreazione;
+	public void setDataApertura(Date dataApertura) {
+		this.dataApertura = dataApertura;
 	}
 
-	public Date getDataPagamento() {
-		return dataPagamento;
+	public Date getDataChiusura() {
+		return dataChiusura;
 	}
 
-	public void setDataPagamento(Date dataPagamento) {
-		this.dataPagamento = dataPagamento;
+	public void setDataChiusura(Date dataChiusura) {
+		this.dataChiusura = dataChiusura;
 	}
 
 	public Date getDataEvasione() {

@@ -125,16 +125,9 @@
 	</c:forEach>
 </table>
 </h:form>
-
-
-
-
-
-
-				</div>
-
+	</div>
 			</div>
-			${interfaccia.carrello}
+			${index.carrello}
 		</div>
 
 		<!--/row-->

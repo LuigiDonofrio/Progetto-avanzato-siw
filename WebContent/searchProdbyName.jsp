@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cerca prodotto per nome</title>
+<title>BuyMentor - Cerca prodotto per nome</title>
 </head>
 <body>
 <h1>Cerca prodotto per nome</h1>
@@ -13,7 +13,7 @@
 <f:view>
 	<h:form>
 		<div>
-			Nome da ricercae: <h:inputText value="#{productController.name}" required="true"
+			Nome da ricercare: <h:inputText value="#{productController.name}" required="true"
                      requiredMessage="Name is mandatory"
                      id="nome"/> <h:message for="nome" />
 		</div>

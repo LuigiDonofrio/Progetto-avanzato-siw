@@ -7,22 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BuyMentor - I miei ordini</title>
+<title>Insert title here</title>
 </head>
 <body>
 <f:view>
 <h:form>
-<table>
-	<tr>
-		<th>Name</th><th>Price</th>
-	</tr>
-	<c:forEach var="ordine" items="#{ordineController.ordini}">
-		<tr><td>
-		<h:commandLink action="#{ordineController.findOrdine}" value="#{ordine.id}">
-			<f:param name="id" value="#{ordine.id}" />
-		</h:commandLink>
-	</c:forEach>
-</table>
+	<div><b>Nickname</b>: ${utenteController.cliente.nickname}</div>
+	
+	<div><b>Nome</b>: ${utenteController.cliente.name}</div>
+	<div><b>Cognome</b>: ${utenteController.cliente.lastname}</div>
+	<div><b>Indirizzo</b>: ${utenteController.cliente.address}</div>
 </h:form>
 </f:view>
 </body>

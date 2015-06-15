@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,20 +22,24 @@ import javax.persistence.Column;
 	@Column(nullable = false)
 	private String name;
 
+	@Column(nullable = false)
 	private Float price;
+	
 	@Column(length = 2000)
-
 	private String description;
 	
 	@ManyToMany(mappedBy="prodotti")
 	private List<Fornitore> fornitori;
+	
 	@Column(nullable = false)
 	private String code;
+	
+	private int quantita;
 	
 	public Product() {
     }
 
-	public Product(String name, Float price, String description, String code) {
+	public Product(String name, Float price, int quantita, String description, String code) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -82,7 +85,15 @@ import javax.persistence.Column;
         this.price = price;
     }
 	
-    public boolean equals(Object obj) {
+    public int getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
+	}
+
+	public boolean equals(Object obj) {
         Product product = (Product)obj;
         return this.getCode().equals(product.getCode());
     }

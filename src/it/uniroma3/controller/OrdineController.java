@@ -1,9 +1,11 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.facade.OrdineFacade;
+import it.uniroma3.model.Cliente;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Ordine;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,51 +14,56 @@ import javax.faces.bean.ManagedProperty;
 
 @ManagedBean
 public class OrdineController {
-	
-	@ManagedProperty(value="#{param.id}")
+
+	@ManagedProperty(value = "#{param.id}")
 	private Long id;
 	private String code;
+
 	public String getProductCode() {
 		return productCode;
 	}
 
-	private String productCode; 
+	private String productCode;
 	private Ordine ordine;
 	private List<Ordine> ordini;
 	private List<OrderLine> righe;
-	
-	public List<OrderLine> getRighe() {
-		return righe;
-	}
-
-	public void setRighe(List<OrderLine> righeOrdine) {
-		this.righe = righeOrdine;
-	}
+	private Cliente cliente;
+	private Date dataEvasione;
 
 	@EJB
 	private OrdineFacade ordineFacade;
-	
-	
-	/*public String createOrdine(String productCodes) {
-		this.ordine = ordineFacade.createOrdine(productCodes);
-	    return "index"; 
-	}*/
-	
+
+	public String ottieniOrdini() {
+		this.ordini = ordineFacade.findAllOrdini();
+		return "allOrdini";
+	}
+
+	public String ottieniOrdiniNonEvasi() {
+		this.ordini = ordineFacade.findAllOrdiniNonEvasi();
+		return "allOrdini";
+	}
+
+	public String evadiOrdine() {
+		this.ordini = ordineFacade.evadiOrdine(this.id, dataEvasione);
+		return "allOrdini";
+	}
+
 	public String aggiungiProdotto(String productCode) {
 		ordineFacade.aggiungiProdotto(productCode);
 		return "index";
 	}
-	
-	public String prendiOrdiniCliente(){
+
+	public String prendiOrdiniCliente() {
 		this.ordini = ordineFacade.getOrdiniCliente();
 		return "myOrders";
 	}
-	
-	public String findOrdine(){
+
+	public String findOrdine() {
 		this.ordine = ordineFacade.getOrdine(id);
 		this.righe = ordineFacade.getRigheOrdine(this.ordine);
 		return "Ordine";
 	}
+
 	public List<Ordine> getOrdini() {
 		return ordini;
 	}
@@ -65,10 +72,10 @@ public class OrdineController {
 		this.ordini = ordini;
 	}
 
-	public void registraOrdine(){
-			ordineFacade.registraOrdine();
+	public void registraOrdine() {
+		ordineFacade.registraOrdine();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -101,7 +108,29 @@ public class OrdineController {
 		this.ordine = ordine;
 	}
 
+	public Date getDataEvasione() {
+		return dataEvasione;
+	}
 
+	public void setDataEvasione(Date dataEvasione) {
+		this.dataEvasione = dataEvasione;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<OrderLine> getRighe() {
+		return righe;
+	}
+
+	public void setRighe(List<OrderLine> righeOrdine) {
+		this.righe = righeOrdine;
+	}
 
 	public OrdineFacade getOrdineFacade() {
 		return ordineFacade;
@@ -110,6 +139,5 @@ public class OrdineController {
 	public void setOrdineFacade(OrdineFacade ordineFacade) {
 		this.ordineFacade = ordineFacade;
 	}
-	
 
 }

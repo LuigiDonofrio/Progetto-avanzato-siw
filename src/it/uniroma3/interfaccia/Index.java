@@ -17,20 +17,6 @@ public class Index {
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession sessionUI = requestUI.getSession();
 
-	public String getPannello() {
-
-		Utente utente = (Utente) this.sessionUI.getAttribute("currentUser");
-		String html = "";
-		if (utente != null) {
-			if (utente.isAdmin()) {
-				return "Amministratore";
-			} else {
-				return "Cliente";
-			}
-		}
-		return null;
-	}
-
 	public String getMessage() {
 
 		String messageWelcome = "/faces/loginUser.jsp";

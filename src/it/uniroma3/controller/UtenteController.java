@@ -1,14 +1,21 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.facade.UtenteFacade;
+import it.uniroma3.model.Cliente;
 import it.uniroma3.model.Ordine;
 import it.uniroma3.model.Utente;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,22 +28,30 @@ public class UtenteController {
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession session = request.getSession();
 
+	@ManagedProperty(value = "#{param.id}")
 	private Long id;
 	private String name;
 	private String nickname;
 	private String lastname;
+	private Date dataNascita;
 	private String password;
+	private String passwordRep;
+	private String proxyPass;
 	private String address;
-	private Map<String, Ordine> orders;
+	private String email;
 	private boolean adminLogged;
 	private boolean userLogged;
+
+	private List<Cliente> listClienti;
+	private Cliente cliente;
 
 	@EJB
 	private UtenteFacade userFacade;
 
 	public String creaCliente() {
-		userFacade.creaCliente(nickname, name, lastname, password, address);
-		return "index";
+		userFacade.creaCliente(nickname, password, name, lastname, dataNascita,
+				address, email);
+		return "riepilogoCliente";
 	}
 
 	public String creaAmministratore() {
@@ -76,6 +91,14 @@ public class UtenteController {
 		this.lastname = lastname;
 	}
 
+	public Date getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -92,12 +115,20 @@ public class UtenteController {
 		this.address = address;
 	}
 
-	public Map<String, Ordine> getOrders() {
-		return orders;
+	public String getPasswordRep() {
+		return passwordRep;
 	}
 
-	public void setOrders(Map<String, Ordine> orders) {
-		this.orders = orders;
+	public void setPasswordRep(String passwordRep) {
+		this.passwordRep = passwordRep;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public UtenteFacade getUserFacade() {
@@ -106,6 +137,32 @@ public class UtenteController {
 
 	public void setUserFacade(UtenteFacade userFacade) {
 		this.userFacade = userFacade;
+	}
+
+	public List<Cliente> getListClienti() {
+		return listClienti;
+	}
+
+	public void setListClienti(List<Cliente> listClienti) {
+		this.listClienti = listClienti;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public String ottieniClienti() {
+		this.listClienti = userFacade.getAllClienti();
+		return "allClienti";
+	}
+
+	public String findCliente() {
+		this.cliente = userFacade.findCliente(id);
+		return "anagraficaCliente";
 	}
 
 	public boolean isAdminLogged() {
@@ -127,6 +184,23 @@ public class UtenteController {
 
 	public void setUserLogged(boolean userLogged) {
 		this.adminLogged = userLogged;
+	}
+
+	public void supportValidatePassword(FacesContext context,
+			UIComponent component, Object value) {
+		this.proxyPass = (String) value;
+	}
+
+	public void validatePassword(FacesContext context, UIComponent component,
+			Object value) {
+		String passwordRep = (String) value;
+
+		if (!passwordRep.equals(this.proxyPass)) {
+			((UIInput) component).setValid(false);
+			FacesMessage msg = new FacesMessage("Le password non coincidono");
+			context.addMessage(component.getClientId(context), msg);
+
+		}
 	}
 
 }

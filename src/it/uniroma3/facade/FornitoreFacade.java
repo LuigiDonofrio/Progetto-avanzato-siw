@@ -1,6 +1,5 @@
 package it.uniroma3.facade;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.uniroma3.model.Fornitore;
@@ -16,9 +15,9 @@ public class FornitoreFacade {
 	@PersistenceContext(unitName = "unit-progetto")
 	private EntityManager em;
 
-	public Fornitore creaFornitore(String nome, long p_iva, String email,
+	public Fornitore creaFornitore(String name, String lastname, long p_iva, String email,
 			String indirizzo, long telefono) {
-		Fornitore fornitore = new Fornitore(p_iva, nome, indirizzo, email, telefono);
+		Fornitore fornitore = new Fornitore(name, lastname, p_iva, indirizzo, email, telefono);
 		em.persist(fornitore);
 		return fornitore;		
 	}

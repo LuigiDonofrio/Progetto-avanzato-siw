@@ -9,7 +9,6 @@ import it.uniroma3.model.Product;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 public class ProductController {
@@ -20,6 +19,7 @@ public class ProductController {
 	private Float price;
 	private String description;
 	private String code;
+	private int quantita;
 	private Product product;
 	private List<Product> products;
 	private long id_p;
@@ -46,8 +46,7 @@ public class ProductController {
 	
 	
 	public String createProduct() {
-		System.out.println("Versione "+FacesContext.class.getPackage().getImplementationVersion());
-		this.product = productFacade.createProduct(name, code, price, description);
+		this.product = productFacade.createProduct(name, code, price, quantita, description);
 		return "product"; 
 	}
 	
@@ -95,6 +94,14 @@ public class ProductController {
 		this.price = price;
 	}
 
+	public int getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -120,7 +127,6 @@ public class ProductController {
 	}
 
 	public List<Product> getProducts() {
-		this.fornitori = productFacade.getFornitori(this.id_p); //Qua si potrebbe impleentare un metodo getProdotto
 		return products;
 	}
 

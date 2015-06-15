@@ -3,12 +3,13 @@ package it.uniroma3.facade;
 import it.uniroma3.model.Amministratore;
 import it.uniroma3.model.Cliente;
 import it.uniroma3.model.Utente;
+
+import java.util.Date;
 import java.util.List;
+
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
 
 @Stateless
 public class UtenteFacade {
@@ -16,10 +17,10 @@ public class UtenteFacade {
 	@PersistenceContext(unitName = "unit-progetto")
 	private EntityManager em;
 
-	public Cliente creaCliente(String nickname, String name, String lastname,
-			String password, String address) {
-		Cliente customer = new Cliente(nickname, name, lastname, password,
-				address);
+	public Cliente creaCliente(String nickname, String password, String name,
+			String lastname, Date dataNascita, String address, String email) {
+		Cliente customer = new Cliente(nickname, password, name, lastname,
+				dataNascita, address, email);
 		em.persist(customer);
 		return customer;
 	}
@@ -53,5 +54,15 @@ public class UtenteFacade {
 				.getResultList();
 
 		System.out.println("Ho eseguito la ricerca");
+	}
+
+	public List<Cliente> getAllClienti() {
+		List<Cliente> clienti = em.createQuery("select c From Cliente c")
+				.getResultList();
+		return clienti;
+	}
+
+	public Cliente findCliente(Long id) {
+		return em.find(Cliente.class, id);
 	}
 }

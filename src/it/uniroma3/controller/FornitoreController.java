@@ -1,7 +1,6 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.facade.FornitoreFacade;
-import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.model.Fornitore;
 import it.uniroma3.model.Product;
 
@@ -14,9 +13,10 @@ import javax.faces.bean.ManagedProperty;
 @ManagedBean
 public class FornitoreController {
 
-	@ManagedProperty(value="#{param.id}")
+	@ManagedProperty(value = "#{param.id}")
 	private Long id;
-	private String nome;
+	private String name;
+	private String lastname;
 	private long p_iva;
 	private String indirizzo;
 	private String email;
@@ -25,16 +25,17 @@ public class FornitoreController {
 	private long id_p;
 	private long id_f;
 	private Fornitore fornitore;
-	
+
 	@EJB
 	private FornitoreFacade fornitoreFacade;
 
-	
-	public String createFornitore(){
-		this.fornitore = this.fornitoreFacade.creaFornitore(this.nome, this.p_iva,this.email,this.indirizzo,this.telefono);
-		return"riepilogoFornitore";
+	public String createFornitore() {
+		this.fornitore = this.fornitoreFacade.creaFornitore(this.name,
+				this.lastname, this.p_iva, this.email, this.indirizzo,
+				this.telefono);
+		return "riepilogoFornitore";
 	}
-	
+
 	public Fornitore getFornitore() {
 		return fornitore;
 	}
@@ -42,14 +43,14 @@ public class FornitoreController {
 	public void setFornitore(Fornitore fornitore) {
 		this.fornitore = fornitore;
 	}
-	
-	
-	public String addProdotto(){
-		this.fornitore=fornitoreFacade.aggiungiProdotto(this.id_f,this.id_p);
+
+	public String addProdotto() {
+		this.fornitore = fornitoreFacade.aggiungiProdotto(this.id_f, this.id_p);
 		this.fornitore = fornitoreFacade.getFornitore(id_f);
 		System.out.println(fornitoreFacade.getProdotti(id_f));
 		return "riepilogoFornitore";
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -58,12 +59,12 @@ public class FornitoreController {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String name) {
+		this.name = name;
 	}
 
 	public long getP_iva() {

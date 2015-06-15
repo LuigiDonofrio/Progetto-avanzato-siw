@@ -15,7 +15,7 @@
 <meta name="author" content="">
 <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-<title>Cover Template for Bootstrap</title>
+<title>BuyMentor - Login</title>
 
 
 <link href="css/bootstrap.css" rel="stylesheet">
@@ -39,21 +39,22 @@
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<f:view>
 				<h:form>
-					<h:outputLabel for="username">Username:</h:outputLabel>
+					<h:outputLabel for="username">Username</h:outputLabel>
 					<h:inputText id="username" value="#{loginController.username}"
 						styleClass="form-control" />
-
-					<h:outputLabel for="password">Password:</h:outputLabel>
-
+					<h:outputLabel for="password">Password</h:outputLabel>
 					<h:inputSecret id="password" value="#{loginController.password}"
 						styleClass="form-control" />
-					<h:selectBooleanCheckbox value="#{loginController.isAdmin}" id="isAdmin"/> Login come Admin?
+					<h:selectBooleanCheckbox value="#{loginController.isAdmin}"
+						id="isAdmin" /> Login come Amministratore?
 					<h:commandButton value="Login"
 						action="#{loginController.loginUtente}"
 						styleClass="btn btn-lg btn-primary btn-block" />
-					</div>
+						<br>${message}
 				</h:form>
+				
 			</f:view>
+		</form>
 	</div>
 	<!-- /container -->
 

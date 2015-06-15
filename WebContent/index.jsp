@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>Off Canvas Template for Bootstrap</title>
+<title>BuyMentor - Home Page</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -88,14 +88,14 @@
 											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
 											Registra nuovo Admin </h:outputLink></li>
 									<li><h:commandLink
-											action="#{utenteController.listClienti}"
+											action="#{utenteController.ottieniClienti}"
 											value="Anagrafica Clienti" /></li>
 											<li class="divider"></li>
-									<li><h:commandLink styleClass="btn btn-link navbar-btn"
-											action="#{ordineController.listOrdini}"
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdini}"
 											value="Tutti gli ordini" /></li>
 									<li><h:commandLink
-											action="#{ordineController.evasioneOrdini}"
+											action="#{ordineController.ottieniOrdiniNonEvasi}"
 											value="Ordini da evadere" /></li>
 									<li class="divider"></li>
 									<li><h:commandLink action="#{loginController.logout}"
@@ -125,7 +125,6 @@
 						<button type="button" class="btn btn-primary btn-xs"
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
-					${message}
 					<div class="jumbotron">
 						<h1>Benvenuto!</h1>
 						<p>Questa &#232 la pagina iniziale.</p>

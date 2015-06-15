@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +23,9 @@ public class Fornitore {
 
 	@Column(nullable = false)
 	private String name;
+	
+	@Column(nullable = false)
+	private String lastname;
 
 	@Column(nullable = false)
 	private String indirizzo;
@@ -37,6 +39,21 @@ public class Fornitore {
 	@ManyToMany
 	private List<Product> prodotti;
 
+	public Fornitore(){
+		
+	}
+	public Fornitore(String name, String lastname, long p_iva, String indirizzo, String email,
+			long telefono) {
+		super();
+		this.p_iva = p_iva;
+		this.name = name;
+		this.lastname = lastname;
+		this.indirizzo = indirizzo;
+		this.email = email;
+		this.telefono = telefono;
+		this.prodotti = new ArrayList<Product>();
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -59,6 +76,14 @@ public class Fornitore {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getIndirizzo() {
@@ -93,18 +118,4 @@ public class Fornitore {
 		this.prodotti = prodotti;
 	}
 
-	public Fornitore(){
-		
-	}
-	public Fornitore(long p_iva, String name, String indirizzo, String email,
-			long telefono) {
-		super();
-		this.p_iva = p_iva;
-		this.name = name;
-		this.indirizzo = indirizzo;
-		this.email = email;
-		this.telefono = telefono;
-		this.prodotti = new ArrayList<Product>();
-	}
-	
 }

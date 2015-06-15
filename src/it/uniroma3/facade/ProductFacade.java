@@ -16,8 +16,8 @@ public class ProductFacade {
     @PersistenceContext(unitName = "unit-progetto")
     private EntityManager em;
     
-	public Product createProduct(String name, String code, Float price, String description) {
-		Product product = new Product(name.toLowerCase(), price, description, code);
+	public Product createProduct(String name, String code, Float price, int quantita, String description) {
+		Product product = new Product(name, price, quantita, description, code);
 		em.persist(product);
 		return product;
 	}
@@ -57,8 +57,7 @@ public class ProductFacade {
 	}
 /*
 	
-		
-	    private EntityManager entityManager;
+		private EntityManager entityManager;
 	    private EntityManagerFactory emf;
 
 		public ProductFacade()  {
@@ -116,9 +115,9 @@ public class ProductFacade {
 		}
 */
 
-	public List<Fornitore> getFornitori(long id_p) {
+	/*public List<Fornitore> getFornitori(long id_p) {
 		Product p = em.find(Product.class, id_p);
 		List<Fornitore> forns = em.createQuery("select f from Fornitore f join f.prodotti p where p.id=:p_id").setParameter("p_id", p.getId()).getResultList();
 		return forns;
-	}
+	}*/
 }
