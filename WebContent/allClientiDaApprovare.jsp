@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>BuyMentor - Tutti gli ordini</title>
+<title>BuyMentor - Clienti</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -133,30 +133,34 @@
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
 					<div class="jumbotron">
-						<h2>Ordini</h2>
-						<table class="table">
-			<h:form>
-				<th>ID</th>
-				<th>Cliente</th>
-				<th>Data</th>
-				<c:forEach var="ordine" items="#{ordineController.ordini}"
-					varStatus="status">			
-					
-					<tr>
-						<td><h:commandLink action="#{ordineController.findOrdine}"
-								value="#{ordine.id}">
-								<f:param name="id" value="#{ordine.id}" />
-							</h:commandLink></td>
-						<td><h:commandLink action="#{utenteController.findCliente}"
-								value="#{ordine.cliente.nickname}">
-								<f:param name="id" value="#{ordine.cliente.id}" />
-							</h:commandLink></td>
-
-						<td>${ordine.dataApertura}</td>
-					</tr>
-				</c:forEach>
-			</h:form>
-		</table>
+						<h2>Clienti</h2>
+						<h:form>
+							<div class="panel panel-default">
+								<table class="table">
+									<tr>
+										<th>Nickname</th>
+										<th>Nome</th>
+										<th>Cognome</th>
+									</tr>
+									<c:forEach var="cliente"
+										items="#{utenteController.listClienti}">
+										<tr>
+											<td><h:commandLink
+													action="#{utenteController.findCliente}"
+													value="#{cliente.nickname}">
+											<f:param name="id" value="#{cliente.id}" />		
+												</h:commandLink></td>
+											<td>${cliente.name}</td>
+											<td>${cliente.lastname}</td>
+											<td>
+												<h:commandLink action="#{utenteController.approvaCliente}" value="Approva" styleClass="btn btn-success">
+												<f:param name="id" value="#{cliente.id}" />
+												</h:commandLink>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</h:form>
 					</div>
 				</div>
 

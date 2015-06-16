@@ -97,6 +97,7 @@ public class OrdineFacade {
 	}
 
 	public List<Ordine> findAllOrdiniNonEvasi() {
+		
 		return em
 				.createQuery("select o from Ordine o where o.status=:nonevaso")
 				.setParameter("nonevaso", 0).getResultList();
@@ -104,15 +105,31 @@ public class OrdineFacade {
 
 	public List<Ordine> evadiOrdine(long id, Date date) {
 		Ordine ordine = em.find(Ordine.class, id);
-		ordine.setDataEvasione(date);
-		ordine.setStatus(1);
+
+
+
 		List<OrderLine> orderlines = this.getRigheOrdine(ordine);
-		
+		System.out.println("DIMENSION: "+orderlines.size());
+
 		for(OrderLine orderline: orderlines){		
 			Product prod = em.find(Product.class, orderline.getProdotto().getId());
-			prod.setQuantita(prod.getQuantita()-orderline.getQuantita());
-			em.merge(prod);
+			if(prod.getQuantita()>=orderline.getQuantita()){
+				prod.setQuantita(prod.getQuantita()-orderline.getQuantita());
+				em.merge(prod);
+			}else{
+				//String errore = "E' stato impossibile evadere l'ordine, controlla la quantità";
+				//this.session.setAttribute("errQuant", errore);
+				System.out.println("Impossibile completare l'ordine");
+				return this.findAllOrdiniNonEvasi();
+			}
 		}
+
+
+
+
+		ordine.setDataEvasione(date);
+		ordine.setStatus(1);
+
 		em.merge(ordine);
 		return this.findAllOrdiniNonEvasi();
 	}

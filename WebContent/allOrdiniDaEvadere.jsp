@@ -135,10 +135,12 @@
 					<div class="jumbotron">
 						<h2>Ordini</h2>
 						<table class="table">
+						${errQuant}
 			<h:form>
 				<th>ID</th>
 				<th>Cliente</th>
 				<th>Data</th>
+				<th>Operazione</th>
 				<c:forEach var="ordine" items="#{ordineController.ordini}"
 					varStatus="status">			
 					
@@ -153,6 +155,12 @@
 							</h:commandLink></td>
 
 						<td>${ordine.dataApertura}</td>
+						
+						<td><h:commandLink action="#{ordineController.findOrdineNonEvaso}" styleClass="btn btn-success"
+								value="Evadi">
+								<f:param name="id" value="#{ordine.id}" />
+							</h:commandLink></td>
+							
 					</tr>
 				</c:forEach>
 			</h:form>

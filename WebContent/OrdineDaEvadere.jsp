@@ -40,8 +40,20 @@
 								value="#{linea.prodotto.name}">
 								<f:param name="id" value="#{linea.prodotto.id}" />
 							</h:commandLink></td>
-							${prodotto.price}
 				</c:forEach>
+				<h:outputLabel for="d_evasione">Data di evasione</h:outputLabel>
+				<h:inputText value="#{ordineController.dataEvasione}"
+					styleClass="datepicker form-control" required="true"
+					requiredMessage="La data di evasione &#232 obbligatoria"
+					id="d_evasione" converterMessage="Formato: GG/MM/AAAA"
+					>
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:inputText>
+				<h:commandButton value="Evadi"
+					action="#{ordineController.evadiOrdine}">
+					<f:param name="id" value="#{ordineController.ordine.id}" />
+				</h:commandButton>
+				HEYYY:${ordineController.ordine.id}
 			</table>
 		</h:form>
 		<!-- Bootstrap core JavaScript

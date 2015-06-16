@@ -15,8 +15,7 @@
 <c:forEach var="fornitore" items="#{productController.allFornitori}">
 <tr><td>
 	<b>${fornitore.name}</b> <h:commandLink styleClass="btn btn-success" value="Aggiungi" action="#{fornitoreController.addProdotto}">
-	<f:param name="id_f" value="#{fornitore.id}"/>
-	<f:param name="id_p" value = "#{productController.id}"/>
+	<f:param name="id" value="#{fornitore.id}"/>
 	</h:commandLink>
 	</td>
 	</tr>

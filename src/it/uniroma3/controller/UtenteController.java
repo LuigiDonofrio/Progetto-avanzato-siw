@@ -47,9 +47,9 @@ public class UtenteController {
 	private UtenteFacade userFacade;
 
 	public String creaCliente() {
-		userFacade.creaCliente(nickname, password, name, lastname, dataNascita,
+		this.cliente = userFacade.creaCliente(nickname, password, name, lastname, dataNascita,
 				address, email);
-		return "riepilogoCliente";
+		return "anagraficaCliente";
 	}
 
 	public String creaAmministratore() {
@@ -161,7 +161,13 @@ public class UtenteController {
 	
 	public String ottieniClientiDaApprovare() {
 		this.listClienti = userFacade.getClientiNonApprovati();
-		return "allClienti";
+		return "allClientiDaApprovare";
+	}
+	
+	public String approvaCliente() {
+		System.out.println("Sono entrato in approva");
+		this.cliente = userFacade.approvaCliente(this.id);
+		return "anagraficaCliente";
 	}
 
 	public String findCliente() {

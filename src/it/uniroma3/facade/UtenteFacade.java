@@ -75,4 +75,15 @@ public class UtenteFacade {
 	public List<Cliente> ottientiClientiDaApprovare() {
 		return em.createQuery("select c from Cliente c where c.approvato=:yes").setParameter("yes", false).getResultList();
 	}
+
+	public Cliente approvaCliente(Long id) {
+		System.out.println("Sono entrato nella facade con id: "+id);
+		Cliente c = this.findCliente(id);
+		if(!c.isApprovato()){
+			c.setApprovato(true);
+		}
+		em.merge(c);
+
+		return c;
+	}
 }
