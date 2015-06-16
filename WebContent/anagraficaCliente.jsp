@@ -35,6 +35,7 @@
 
 <body>
 	<f:view>
+		<!-- Fixed navbar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -58,7 +59,8 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -76,7 +78,8 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -134,38 +137,46 @@
 					<div class="jumbotron">
 						<h2>${utenteController.cliente.name}
 							${utenteController.cliente.lastname}</h2>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Dettagli</h3>
-							</div>
-							<div class="panel-body">
-								<div>
-									<b>Username:</b> ${utenteController.cliente.nickname}
+						<h:form>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Dettagli</h3>
 								</div>
-								<div>
-									<b>Nome:</b> ${utenteController.cliente.name}
-								</div>
-								<div>
-									<b>Cognome:</b> ${utenteController.cliente.lastname}
-								</div>
-								<div>
-									<b>Indirizzo:</b> ${utenteController.cliente.address}
-								</div>
-								<div>
-									<b>Data di Nascita:</b>
-									<h:outputFormat value="{0, date, dd-MM-yyyy}">
-										<f:param value="#{utenteController.cliente.dataNascita}" />
-									</h:outputFormat>
-								</div>
-								<div>
-									<b>Data di Registrazione:</b>
-									<h:outputFormat value="{0, date, dd-MM-yyyy}">
-										<f:param value="#{utenteController.cliente.dataRegistrazione}" />
-									</h:outputFormat>
-								</div>
+								<div class="panel-body">
+									<div>
+										<b>Username:</b> ${utenteController.cliente.nickname}
+									</div>
+									<div>
+										<b>Nome:</b> ${utenteController.cliente.name}
+									</div>
+									<div>
+										<b>Cognome:</b> ${utenteController.cliente.lastname}
+									</div>
+									<div>
+										<b>Indirizzo:</b> ${utenteController.cliente.address}
+									</div>
+									<div>
+										<b>Data di Nascita:</b>
+										<h:outputFormat value="{0, date, dd/MM/yyyy}">
+											<f:param value="#{utenteController.cliente.dataNascita}" />
+										</h:outputFormat>
+									</div>
+									<div>
+										<b>Data di Registrazione:</b>
+										<h:outputFormat value="{0, date, dd/MM/yyyy}">
+											<f:param
+												value="#{utenteController.cliente.dataRegistrazione}" />
+										</h:outputFormat>
+									</div>
 
+								</div>
 							</div>
-						</div>
+							<h:commandLink action="#{utenteController.approvaCliente}"
+								rendered="#{not utenteController.cliente.approvato}"
+								value="Approva" styleClass="btn btn-success">
+								<f:param name="id" value="#{utenteController.cliente.id}" />
+							</h:commandLink>
+						</h:form>
 					</div>
 				</div>
 

@@ -44,7 +44,7 @@ public class OrdineController {
 
 	public String ottieniOrdiniNonEvasi() {
 		this.ordini = ordineFacade.findAllOrdiniNonEvasi();
-		return "allOrdiniDaEvadere";
+		return "allOrdini";
 	}
 
 	public String svuotaCarrello() {
@@ -69,14 +69,12 @@ public class OrdineController {
 
 	public String findOrdine() {
 		this.ordine = ordineFacade.getOrdine(id);
-		System.out.println("Sono arrivato");
 		this.righe = ordineFacade.getRigheOrdine(this.ordine);
 		return "Ordine";
 	}
 	
 	public String findOrdineNonEvaso() {
 		this.ordine = ordineFacade.getOrdine(id);
-		System.out.println("Sono arrivato");
 		this.righe = ordineFacade.getRigheOrdine(this.ordine);
 		return "OrdineDaEvadere";
 	}

@@ -63,7 +63,6 @@ public class Index {
 	/*public String getRiepilogo() {
 		Ordine ordine = (Ordine) this.sessionUI.getAttribute("ordine");
 		String htmlGen = "";
-		System.out.println();
 		if (ordine != null) {
 			htmlGen = "<table width=\"100%\"><tr><td><b>Nome Prodotto<b></td><td><b>Quantita<b></td><td><b>Costo</td>";
 			for (OrderLine linea : ordine.getOrderLines()) {

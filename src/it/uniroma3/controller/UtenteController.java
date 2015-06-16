@@ -161,11 +161,10 @@ public class UtenteController {
 	
 	public String ottieniClientiDaApprovare() {
 		this.listClienti = userFacade.getClientiNonApprovati();
-		return "allClientiDaApprovare";
+		return "allClienti";
 	}
 	
 	public String approvaCliente() {
-		System.out.println("Sono entrato in approva");
 		this.cliente = userFacade.approvaCliente(this.id);
 		return "anagraficaCliente";
 	}

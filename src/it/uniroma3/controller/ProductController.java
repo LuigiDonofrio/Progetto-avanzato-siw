@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 public class ProductController {
-	
-	@ManagedProperty(value="#{param.id}")
+
+	@ManagedProperty(value = "#{param.id}")
 	private Long id;
 	private String name;
 	private Float price;
@@ -25,13 +25,20 @@ public class ProductController {
 	private int quantita;
 	private Product product;
 	private List<Product> products;
-	@ManagedProperty(value="#{param.id_f}")
+	@ManagedProperty(value = "#{param.id_f}")
 	private String id_f;
-	
+	private long id_p;
+
+	private Long[] fornitori;
+	private List<Fornitore> allFornitori;
+
+	@EJB
+	private ProductFacade productFacade;
+
 	private HttpServletRequest request = (HttpServletRequest) FacesContext
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession session = request.getSession();
-	
+
 	public String getId_f() {
 		return id_f;
 	}
@@ -40,10 +47,6 @@ public class ProductController {
 		this.id_f = id_f;
 	}
 
-	private long id_p;
-	private Long[] fornitori;
-	private List<Fornitore> allFornitori;
-	
 	public List<Fornitore> getAllFornitori() {
 		return allFornitori;
 	}
@@ -51,7 +54,7 @@ public class ProductController {
 	public void setAllFornitori(List<Fornitore> allFornitori) {
 		this.allFornitori = allFornitori;
 	}
-
+	
 	public long getId_p() {
 		return id_p;
 	}
@@ -68,43 +71,48 @@ public class ProductController {
 		this.fornitori = fornitori;
 	}
 
-	@EJB
-	private ProductFacade productFacade;
-	
-	
-	
 	public String createProduct() {
-		this.product = productFacade.createProduct(name, code, price, quantita, description);
-		return "product"; 
+		this.product = productFacade.createProduct(name, code, price, quantita,
+				description);
+		return "product";
 	}
-	
+
 	public String listProducts() {
 		this.products = productFacade.getAllProducts();
-		return "catalogo"; 
+		return "catalogo";
 	}
 
 	public String findProduct() {
 		this.product = productFacade.getProduct(id);
 		return "product";
 	}
-	
+
 	public String findProduct(Long id) {
 		this.product = productFacade.getProduct(id);
 		return "product";
 	}
 
-	/*public String findProductbyName() {
-		this.products = productFacade.searchProductbyName(this.name);
-		return "catalogo";
-	}*/
-	
+	/*
+	 * public String findProductbyName() { this.products =
+	 * productFacade.searchProductbyName(this.name); return "catalogo"; }
+	 */
+
 	public String aggiungiFornitori() {
 		this.allFornitori = productFacade.getAllFornitori();
-		System.out.println("Il prodotto e': "+this.id);
-		this.session.setAttribute("idProdottoCorrente", this.id);
+		findProduct(this.id);
+		this.session.setAttribute("prodottoCorrente", this.product);
 		return "addFornitore";
 	}
-	
+
+	public boolean isFornitore(Long id) {
+		Product p = (Product) this.session.getAttribute("prodottoCorrente");
+		List<Long> forns = this.productFacade.getFornitoriProdotto(p);
+		if (forns.contains(id))
+			return true;
+		else
+			return false;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -169,5 +177,3 @@ public class ProductController {
 		this.products = products;
 	}
 }
-
-

@@ -35,10 +35,6 @@ public class UtenteFacade {
 	}
 
 	public Utente srcUser(String nickname) {
-		System.out
-				.println(em.createQuery(
-						"select u from Utente u where u.nickname=:username")
-						.toString());
 		List<?> users = em
 				.createQuery(
 						"select u from Utente u where u.nickname=:username")
@@ -53,8 +49,6 @@ public class UtenteFacade {
 						"select c from Cliente c where c.nickname=:username")
 				.setParameter("username", cliente.getNickname())
 				.getResultList();
-
-		System.out.println("Ho eseguito la ricerca");
 	}
 
 	public List<Cliente> getAllClienti() {
@@ -62,24 +56,26 @@ public class UtenteFacade {
 				.getResultList();
 		return clienti;
 	}
-	
+
 	public List<Cliente> getClientiNonApprovati() {
-		List<Cliente> clienti = em.createQuery("select c From Cliente c where c.approvato=false").getResultList();
+		List<Cliente> clienti = em.createQuery(
+				"select c From Cliente c where c.approvato=false")
+				.getResultList();
 		return clienti;
 	}
-	
+
 	public Cliente findCliente(Long id) {
 		return em.find(Cliente.class, id);
 	}
 
 	public List<Cliente> ottientiClientiDaApprovare() {
-		return em.createQuery("select c from Cliente c where c.approvato=:yes").setParameter("yes", false).getResultList();
+		return em.createQuery("select c from Cliente c where c.approvato=:yes")
+				.setParameter("yes", false).getResultList();
 	}
 
 	public Cliente approvaCliente(Long id) {
-		System.out.println("Sono entrato nella facade con id: "+id);
 		Cliente c = this.findCliente(id);
-		if(!c.isApprovato()){
+		if (!c.isApprovato()) {
 			c.setApprovato(true);
 		}
 		em.merge(c);

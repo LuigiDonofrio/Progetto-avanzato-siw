@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -59,7 +59,7 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +77,7 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">

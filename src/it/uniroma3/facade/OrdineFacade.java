@@ -83,9 +83,7 @@ public class OrdineFacade {
 		List<OrderLine> righe = em
 				.createQuery("select o from OrderLine o where o.ordine=:ord")
 				.setParameter("ord", ordine).getResultList();
-		System.out.println("Dimensione: " + righe.size());
 		OrderLine riga = (OrderLine) righe.get(0);
-		System.out.println(riga.getProdotto().getName());
 
 		return righe;
 	}
@@ -97,7 +95,7 @@ public class OrdineFacade {
 	}
 
 	public List<Ordine> findAllOrdiniNonEvasi() {
-		
+
 		return em
 				.createQuery("select o from Ordine o where o.status=:nonevaso")
 				.setParameter("nonevaso", 0).getResultList();
@@ -106,26 +104,21 @@ public class OrdineFacade {
 	public List<Ordine> evadiOrdine(long id, Date date) {
 		Ordine ordine = em.find(Ordine.class, id);
 
-
-
 		List<OrderLine> orderlines = this.getRigheOrdine(ordine);
-		System.out.println("DIMENSION: "+orderlines.size());
 
-		for(OrderLine orderline: orderlines){		
-			Product prod = em.find(Product.class, orderline.getProdotto().getId());
-			if(prod.getQuantita()>=orderline.getQuantita()){
-				prod.setQuantita(prod.getQuantita()-orderline.getQuantita());
+		for (OrderLine orderline : orderlines) {
+			Product prod = em.find(Product.class, orderline.getProdotto()
+					.getId());
+			if (prod.getQuantita() >= orderline.getQuantita()) {
+				prod.setQuantita(prod.getQuantita() - orderline.getQuantita());
 				em.merge(prod);
-			}else{
-				//String errore = "E' stato impossibile evadere l'ordine, controlla la quantità";
-				//this.session.setAttribute("errQuant", errore);
-				System.out.println("Impossibile completare l'ordine");
+			} else {
+				// String errore =
+				// "E' stato impossibile evadere l'ordine, controlla la quantità";
+				// this.session.setAttribute("errQuant", errore);
 				return this.findAllOrdiniNonEvasi();
 			}
 		}
-
-
-
 
 		ordine.setDataEvasione(date);
 		ordine.setStatus(1);

@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>BuyMentor - Home Page</title>
+<title>BuyMentor - Dettagli prodotto</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +59,7 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +77,7 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -133,7 +133,7 @@
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
 					<div class="jumbotron">
-						<h1>${productController.product.name}</h1>
+						<h2>${productController.product.name}</h2>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">Dettagli</h3>
@@ -168,7 +168,7 @@
 								<h:commandButton styleClass="btn btn-success"
 									rendered="#{utenteController.userLogged && utenteController.adminLogged}"
 									action="#{productController.aggiungiFornitori}"
-									value="Aggiungi fornitori">
+									value="Fornitori">
 									<f:param name="id" value="#{productController.product.id}" />
 								</h:commandButton>
 							</h:form>

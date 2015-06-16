@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -59,7 +59,7 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +77,7 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -185,18 +185,18 @@
 				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-								<table style="width:100%">
-									<tr>
-										<td width="70%"><h3 class="panel-title">Carrello</h3></td>
-										<td width="30%" align="right"><span
-											class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
-											style="float: right"></span></td>
-									</tr>
-								</table>
+							<table style="width: 100%">
+								<tr>
+									<td width="70%"><h3 class="panel-title">Carrello</h3></td>
+									<td width="30%" align="right"><span
+										class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
+										style="float: right"></span></td>
+								</tr>
+							</table>
 						</div>
 						<div class="panel-body">${index.carrello}</div>
 						<h:form>
-							<table style="width:100%">
+							<table style="width: 100%">
 								<tr>
 									<td width="55%" align="center"><h:commandLink
 											styleClass="btn btn-success" action="riepilogoOrdine.jsp"

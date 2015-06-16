@@ -59,7 +59,7 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +77,7 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">

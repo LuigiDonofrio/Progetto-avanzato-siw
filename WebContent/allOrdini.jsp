@@ -59,7 +59,8 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +78,8 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.nickname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -134,29 +136,49 @@
 					</p>
 					<div class="jumbotron">
 						<h2>Ordini</h2>
-						<table class="table">
-			<h:form>
-				<th>ID</th>
-				<th>Cliente</th>
-				<th>Data</th>
-				<c:forEach var="ordine" items="#{ordineController.ordini}"
-					varStatus="status">			
-					
-					<tr>
-						<td><h:commandLink action="#{ordineController.findOrdine}"
-								value="#{ordine.id}">
-								<f:param name="id" value="#{ordine.id}" />
-							</h:commandLink></td>
-						<td><h:commandLink action="#{utenteController.findCliente}"
-								value="#{ordine.cliente.nickname}">
-								<f:param name="id" value="#{ordine.cliente.id}" />
-							</h:commandLink></td>
-
-						<td>${ordine.dataApertura}</td>
-					</tr>
-				</c:forEach>
-			</h:form>
-		</table>
+						<h:form>
+							<div class="panel panel-default">
+								<table class="table">
+									<tr>
+										<th>ID</th>
+										<th>Cliente</th>
+										<th>Data apertura</th>
+										<th>Data chiusura</th>
+										<th>Data evasione</th>
+									</tr>
+									<c:forEach var="ordine" items="#{ordineController.ordini}"
+										varStatus="status">
+										<tr>
+											<td><h:commandLink
+													action="#{ordineController.findOrdine}"
+													value="#{ordine.id}">
+													<f:param name="id" value="#{ordine.id}" />
+												</h:commandLink></td>
+											<td><h:commandLink
+													action="#{utenteController.findCliente}"
+													value="#{ordine.cliente.nickname}">
+													<f:param name="id" value="#{ordine.cliente.id}" />
+												</h:commandLink></td>
+											<td><h:outputFormat value="{0, date, dd/MM/yyyy}">
+													<f:param value="#{ordine.dataApertura}" />
+												</h:outputFormat></td>
+											<td><h:outputFormat value="{0, date, dd/MM/yyyy}">
+													<f:param value="#{ordine.dataChiusura}" />
+												</h:outputFormat></td>
+											<td><h:outputFormat
+													rendered="#{not empty ordine.dataEvasione}"
+													value="{0, date, dd/MM/yyyy}">
+													<f:param value="#{ordine.dataEvasione}" />
+												</h:outputFormat> <h:commandLink rendered="#{empty ordine.dataEvasione}"
+													action="#{ordineController.findOrdineNonEvaso}"
+													styleClass="btn btn-success" value="Evadi">
+													<f:param name="id" value="#{ordine.id}" />
+												</h:commandLink></td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</h:form>
 					</div>
 				</div>
 
