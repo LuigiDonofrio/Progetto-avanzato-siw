@@ -2,6 +2,7 @@ package it.uniroma3.controller;
 
 import it.uniroma3.facade.LoginFacade;
 import it.uniroma3.facade.OrdineFacade;
+import it.uniroma3.model.Cliente;
 import it.uniroma3.model.Login;
 import it.uniroma3.model.Utente;
 
@@ -39,6 +40,14 @@ public class LoginController {
 			user = this.loginFacade.validaLoginCliente(this.login);
 
 		if (user != null) {
+				try {
+					Cliente cli = (Cliente) user;
+					if (!cli.isApprovato()) {
+						String errore = ("<div class=\"alert alert-warning\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Error:</span> Hai inserito dei dati di login errati, riprova o registrati!</div>");
+						this.request.setAttribute("message", errore);
+						return "loginUser.jsp";
+					}
+				} catch (Exception e) {}
 			this.session.setAttribute("currentUser", user);
 			this.request.setAttribute("message", null);
 		} else {

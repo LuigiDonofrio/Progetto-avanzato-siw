@@ -58,7 +58,6 @@ public class UtenteController {
 	}
 	
 
-
 	public Long getId() {
 		return id;
 	}
@@ -190,7 +189,7 @@ public class UtenteController {
 	public void setUserLogged(boolean userLogged) {
 		this.adminLogged = userLogged;
 	}
-
+	
 	public void supportValidatePassword(FacesContext context,
 			UIComponent component, Object value) {
 		this.proxyPass = (String) value;

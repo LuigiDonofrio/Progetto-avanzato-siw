@@ -73,7 +73,7 @@
 							</div>
 							<div class="btn-group">
 								<h:panelGroup
-									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>

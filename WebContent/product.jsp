@@ -1,15 +1,10 @@
-<%@page import="it.uniroma3.controller.OrdineController"%>
-<%@page import="it.uniroma3.controller.ProductController"%>
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html xmlns:p="http://primefaces.org/ui"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>Off Canvas Template for Bootstrap</title>
+<title>BuyMentor - Home Page</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,124 +35,194 @@
 
 <body>
 	<f:view>
-		<nav class="navbar navbar-fixed-top navbar-inverse">
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Project name</a>
+					<h:form>
+						<h:outputLink styleClass="navbar-brand"
+							value='#{request.contextPath}/faces/index.jsp'>BuyMentor</h:outputLink>
+					</h:form>
 				</div>
-				<div id="navbar" class="collapse navbar-collapse">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href='<c:url value="/faces/newProduct.jsp" />'>New
-								Product</a></li>
 						<li><h:form>
-								<h:commandLink styleClass="btn btn-default navbar-btn"
+								<h:commandLink styleClass="btn btn-link navbar-btn"
 									action="#{productController.listProducts}"
-									value="List all Products" />
+									value="Catalogo prodotti" />
 							</h:form></li>
-						<li><a href="#contact">Contact</a></li>
 					</ul>
-					<div class="navbar-form navbar-right">
-						${interfaccia.message}
-
-						<div class="col-lg-6">
-
-							<h:form>
-								<div class="input-group">
-
-									<h:inputText styleClass="form-control"
-										value="#{productController.name}" required="true"
-										requiredMessage="Name is mandatory" id="nome" />
-									<h:message for="nome" />
-									<span class="input-group-btn"> <h:commandButton
-											styleClass="btn btn-default"
-											action="#{productController.findProductbyName}" value="Cerca" />
-									</span>
-
-								</div>
-								<!-- /input-group -->
-							</h:form>
-
-						</div>
-						<!-- /.col-lg-6 -->
-
-
-					</div>
-
-
-
+					<span class="nav navbar-form navbar-right"> <h:form>
+							<div class="btn-group">
+								<h:panelGroup
+									rendered="#{utenteController.userLogged && !utenteController.adminLogged}">
+									<button type="button" class="btn btn-success dropdown-toggle"
+										data-toggle="dropdown" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+										${currentUser.nickname} <span class="caret"></span>
+									</button>
+								</h:panelGroup>
+								<ul class="dropdown-menu" role="menu">
+									<li><h:commandLink
+											action="#{ordineController.prendiOrdiniCliente}"
+											value="Cronologia ordini" /></li>
+									<li class="divider"></li>
+									<li><h:commandLink action="#{loginController.logout}"
+											value="Logout" /></li>
+								</ul>
+							</div>
+							<div class="btn-group">
+								<h:panelGroup
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">
+									<button type="button" class="btn btn-primary dropdown-toggle"
+										data-toggle="dropdown" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+										${currentUser.nickname} <span class="caret"></span>
+									</button>
+								</h:panelGroup>
+								<ul class="dropdown-menu" role="menu">
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newProduct.jsp'>
+											Aggiungi prodotto </h:outputLink></li>
+									<li class="divider" />
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
+											Registra nuovo Admin </h:outputLink></li>
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newFornitore.jsp'>
+											Registra nuovo fornitore </h:outputLink></li>
+									<li class="divider" />
+									<li><h:commandLink
+											action="#{utenteController.ottieniClienti}"
+											value="Anagrafica Clienti" /></li>
+									<li><h:commandLink
+											action="#{utenteController.ottieniClientiDaApprovare}"
+											value="Clienti da approvare" /></li>
+									<li class="divider" />
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdini}"
+											value="Tutti gli ordini" /></li>
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdiniNonEvasi}"
+											value="Ordini da evadere" /></li>
+									<li class="divider" />
+									<li><h:commandLink action="#{loginController.logout}"
+											value="Logout" /></li>
+								</ul>
+							</div>
+							<h:outputLink value='#{request.contextPath}/faces/loginUser.jsp'
+								styleClass="btn btn-success"
+								rendered="#{!utenteController.userLogged}">Login</h:outputLink>
+							<h:outputLink
+								value='#{request.contextPath}/faces/registraCliente.jsp'
+								styleClass="btn btn-link"
+								rendered="#{!utenteController.userLogged}">Registrati</h:outputLink>
+						</h:form>
+					</span>
 				</div>
-				<!-- /.nav-collapse -->
+
 			</div>
-			<!-- /.container -->
 		</nav>
-		<!-- /.navbar -->
+		<!--/.nav-collapse -->
 
 		<div class="container">
-
 			<div class="row row-offcanvas row-offcanvas-right">
-
 				<div class="col-xs-12 col-sm-9">
 					<p class="pull-right visible-xs">
 						<button type="button" class="btn btn-primary btn-xs"
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
-					${message}
 					<div class="jumbotron">
-
 						<h1>${productController.product.name}</h1>
-						<h2>Details</h2>
-						<div>Code: ${productController.product.code}</div>
-						<div>Price: ${productController.product.price}</div>
-						<div>Description: ${productController.product.description}</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Dettagli</h3>
+							</div>
+							<div class="panel-body">
+								<div>
+									<b>Codice:</b> ${productController.product.code}
+								</div>
+								<div>
+									<b>Prezzo:</b> ${productController.product.price}
+								</div>
+								<div>
+									<b>Descrizione:</b> ${productController.product.description}
+								</div>
+								<div>
+									<h:outputText
+										rendered="#{utenteController.userLogged && utenteController.adminLogged}">
+										<b>Quantità in magazzino:</b>  ${productController.product.quantita}
+							</h:outputText>
+								</div>
+
+							</div>
+						</div>
 						<div>
 							<h:form>
 								<c:set scope="session" var="code"
 									value="${productController.product.code}" />
 								<h:commandButton styleClass="btn btn-success"
+									rendered="#{utenteController.userLogged && !utenteController.adminLogged}"
 									action="#{ordineController.aggiungiProdotto(code)}"
 									value="Aggiungi al carrello" />
-									
 								<h:commandButton styleClass="btn btn-success"
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}"
 									action="#{productController.aggiungiFornitori}"
 									value="Aggiungi fornitori">
-								<f:param name="id" value="#{productController.product.id}"/></h:commandButton>
+									<f:param name="id" value="#{productController.product.id}" />
+								</h:commandButton>
 							</h:form>
 						</div>
-
 					</div>
-
 				</div>
-				${interfaccia.carrello}
+
+				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<table style="width: 100%">
+								<tr>
+									<td width="70%"><h3 class="panel-title">Carrello</h3></td>
+									<td width="30%" align="right"><span
+										class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
+										style="float: right"></span></td>
+								</tr>
+							</table>
+						</div>
+						<div class="panel-body">${index.carrello}</div>
+						<h:form>
+							<table style="width: 100%">
+								<tr>
+									<td width="55%" align="center"><h:commandLink
+											styleClass="btn btn-success" action="riepilogoOrdine.jsp"
+											value="Conferma" rendered="#{ordineController.valido}" /></td>
+									<td width="45%" align="center"><h:commandLink
+											styleClass="btn btn-success"
+											action="#{ordineController.svuotaCarrello()}" value="Svuota"
+											rendered="#{ordineController.valido}" /></td>
+								</tr>
+							</table>
+						</h:form>
+					</div>
+					<!--/panel-->
+				</div>
+				<!--/sidebar-->
+
+				<hr>
+				<footer>
+					<p>&copy; Company 2014</p>
+				</footer>
 			</div>
-
 			<!--/row-->
-
 		</div>
-		<hr>
-		<footer>
-			<p>&copy; Company 2014</p>
-		</footer>
 		<!--/.container-->
-
-
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="js/ie10-viewport-bug-workaround.js"></script>
-
 		<script src="js/offcanvas.js"></script>
 	</f:view>
 </body>

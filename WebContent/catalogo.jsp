@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -73,7 +73,7 @@
 							</div>
 							<div class="btn-group">
 								<h:panelGroup
-									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -84,25 +84,28 @@
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newProduct.jsp'>
 											Aggiungi prodotto </h:outputLink></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
 											Registra nuovo Admin </h:outputLink></li>
-									<li class="divider"></li>
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newFornitore.jsp'>
 											Registra nuovo fornitore </h:outputLink></li>
+									<li class="divider" />
 									<li><h:commandLink
 											action="#{utenteController.ottieniClienti}"
 											value="Anagrafica Clienti" /></li>
-									<li class="divider"></li>
+									<li><h:commandLink
+											action="#{utenteController.ottieniClientiDaApprovare}"
+											value="Clienti da approvare" /></li>
+									<li class="divider" />
 									<li><h:commandLink
 											action="#{ordineController.ottieniOrdini}"
 											value="Tutti gli ordini" /></li>
 									<li><h:commandLink
 											action="#{ordineController.ottieniOrdiniNonEvasi}"
 											value="Ordini da evadere" /></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:commandLink action="#{loginController.logout}"
 											value="Logout" /></li>
 								</ul>
@@ -147,7 +150,7 @@
 													<f:param name="id" value="#{product.id}" />
 												</h:commandLink></td>
 											<td>${product.name}</td>
-											<td>${product.price} &#8364</td>
+											<td>${product.price} €</td>
 										</tr>
 									</c:forEach>
 								</table>

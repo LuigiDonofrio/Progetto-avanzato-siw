@@ -73,7 +73,7 @@
 							</div>
 							<div class="btn-group">
 								<h:panelGroup
-									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -84,21 +84,28 @@
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newProduct.jsp'>
 											Aggiungi prodotto </h:outputLink></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
 											Registra nuovo Admin </h:outputLink></li>
+									<li><h:outputLink
+											value='#{request.contextPath}/faces/newFornitore.jsp'>
+											Registra nuovo fornitore </h:outputLink></li>
+									<li class="divider" />
 									<li><h:commandLink
-											action="#{utenteController.listClienti}"
+											action="#{utenteController.ottieniClienti}"
 											value="Anagrafica Clienti" /></li>
-									<li class="divider"></li>
-									<li><h:commandLink styleClass="btn btn-link navbar-btn"
-											action="#{ordineController.listOrdini}"
+									<li><h:commandLink
+											action="#{utenteController.ottieniClientiDaApprovare}"
+											value="Clienti da approvare" /></li>
+									<li class="divider" />
+									<li><h:commandLink
+											action="#{ordineController.ottieniOrdini}"
 											value="Tutti gli ordini" /></li>
 									<li><h:commandLink
-											action="#{ordineController.evasioneOrdini}"
+											action="#{ordineController.ottieniOrdiniNonEvasi}"
 											value="Ordini da evadere" /></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:commandLink action="#{loginController.logout}"
 											value="Logout" /></li>
 								</ul>
@@ -113,14 +120,13 @@
 						</h:form>
 					</span>
 				</div>
-				<!--/.nav-collapse -->
+
 			</div>
 		</nav>
+		<!--/.nav-collapse -->
 
 		<div class="container">
-
 			<div class="row row-offcanvas row-offcanvas-right">
-
 				<div class="col-xs-12 col-sm-9">
 					<p class="pull-right visible-xs">
 						<button type="button" class="btn btn-primary btn-xs"
@@ -164,7 +170,8 @@
 								<h:outputLabel for="description">Descrizione</h:outputLabel>
 								<h:inputTextarea value="#{productController.description}"
 									styleClass="form-control" required="false" cols="20" rows="5" />
-							</div><br>
+							</div>
+							<br>
 							<div>
 								<h:commandButton value="Invia"
 									action="#{productController.createProduct}"
@@ -173,14 +180,45 @@
 						</h:form>
 					</div>
 				</div>
-			</div>
+				
+				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<table style="width: 100%">
+								<tr>
+									<td width="70%"><h3 class="panel-title">Carrello</h3></td>
+									<td width="30%" align="right"><span
+										class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
+										style="float: right"></span></td>
+								</tr>
+							</table>
+						</div>
+						<div class="panel-body">${index.carrello}</div>
+						<h:form>
+							<table style="width: 100%">
+								<tr>
+									<td width="55%" align="center"><h:commandLink
+											styleClass="btn btn-success" action="riepilogoOrdine.jsp"
+											value="Conferma" rendered="#{ordineController.valido}" /></td>
+									<td width="45%" align="center"><h:commandLink
+											styleClass="btn btn-success"
+											action="#{ordineController.svuotaCarrello()}" value="Svuota"
+											rendered="#{ordineController.valido}" /></td>
+								</tr>
+							</table>
+						</h:form>
+					</div>
+					<!--/panel-->
+				</div>
+				<!--/sidebar-->
 
+				<hr>
+				<footer>
+					<p>&copy; Company 2014</p>
+				</footer>
+			</div>
+			<!--/row-->
 		</div>
-		<!--/row-->
-		<hr>
-		<footer>
-			<p>&copy; Company 2014</p>
-		</footer>
 		<!--/.container-->
 		<!-- Bootstrap core JavaScript
     ================================================== -->

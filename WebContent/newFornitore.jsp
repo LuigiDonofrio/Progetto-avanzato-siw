@@ -73,7 +73,7 @@
 							</div>
 							<div class="btn-group">
 								<h:panelGroup
-									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -84,25 +84,28 @@
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newProduct.jsp'>
 											Aggiungi prodotto </h:outputLink></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
 											Registra nuovo Admin </h:outputLink></li>
-									<li class="divider"></li>
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newFornitore.jsp'>
 											Registra nuovo fornitore </h:outputLink></li>
+									<li class="divider" />
 									<li><h:commandLink
 											action="#{utenteController.ottieniClienti}"
 											value="Anagrafica Clienti" /></li>
-									<li class="divider"></li>
+									<li><h:commandLink
+											action="#{utenteController.ottieniClientiDaApprovare}"
+											value="Clienti da approvare" /></li>
+									<li class="divider" />
 									<li><h:commandLink
 											action="#{ordineController.ottieniOrdini}"
 											value="Tutti gli ordini" /></li>
 									<li><h:commandLink
 											action="#{ordineController.ottieniOrdiniNonEvasi}"
 											value="Ordini da evadere" /></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:commandLink action="#{loginController.logout}"
 											value="Logout" /></li>
 								</ul>
@@ -117,11 +120,11 @@
 						</h:form>
 					</span>
 				</div>
-				
+
 			</div>
 		</nav>
 		<!--/.nav-collapse -->
-		
+
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-right">
 				<div class="col-xs-12 col-sm-9">
@@ -130,7 +133,7 @@
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
 					<div class="jumbotron">
-						<h2>Registrazione fornitore</h2>
+						<h3>Registrazione fornitore</h3>
 						<h:form>
 							<div>
 								<h:outputLabel for="name">Nome</h:outputLabel>
@@ -149,30 +152,34 @@
 							<div>
 								<h:outputLabel for="p_iva">Partita iva</h:outputLabel>
 								<h:inputText value="#{fornitoreController.p_iva}"
-									styleClass="form-control" required="true" requiredMessage="Code is mandatory" id="p_iva" />
+									styleClass="form-control" required="true"
+									requiredMessage="Code is mandatory" id="p_iva" />
 								<h:message for="p_iva" />
 							</div>
 							<div>
 								<h:outputLabel for="address">Indirizzo</h:outputLabel>
 								<h:inputText value="#{fornitoreController.indirizzo}"
-									styleClass="form-control" required="true" requiredMessage="L'indirizzo è obbligatorio"
-									id="indirizzo" />
+									styleClass="form-control" required="true"
+									requiredMessage="L'indirizzo è obbligatorio" id="indirizzo" />
 								<h:message for="indirizzo" />
 							</div>
 							<div>
 								<h:outputLabel for="email">E-mail</h:outputLabel>
 								<h:inputText value="#{fornitoreController.email}"
-									styleClass="form-control" required="true" requiredMessage="L'email è obbligatoria" id="email" />
+									styleClass="form-control" required="true"
+									requiredMessage="L'email è obbligatoria" id="email" />
 								<h:message for="email" />
 							</div>
 							<div>
 								<h:outputLabel for="telefono">Telefono</h:outputLabel>
 								<h:inputText value="#{fornitoreController.telefono}"
-									styleClass="form-control" required="true" requiredMessage="Il numero di telefono è obbligatorio"
+									styleClass="form-control" required="true"
+									requiredMessage="Il numero di telefono è obbligatorio"
 									id="telefono" />
 								<h:message for="telefono" />
 							</div>
 							<div>
+								<br>
 								<h:commandButton value="Invia"
 									styleClass="btn btn-lg btn-primary btn-block"
 									action="#{fornitoreController.createFornitore}" />
@@ -182,14 +189,44 @@
 
 
 				</div>
-			</div>
+				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<table style="width: 100%">
+								<tr>
+									<td width="70%"><h3 class="panel-title">Carrello</h3></td>
+									<td width="30%" align="right"><span
+										class="glyphicon glyphicon-shopping-cart" aria-hidden="true"
+										style="float: right"></span></td>
+								</tr>
+							</table>
+						</div>
+						<div class="panel-body">${index.carrello}</div>
+						<h:form>
+							<table style="width: 100%">
+								<tr>
+									<td width="55%" align="center"><h:commandLink
+											styleClass="btn btn-success" action="riepilogoOrdine.jsp"
+											value="Conferma" rendered="#{ordineController.valido}" /></td>
+									<td width="45%" align="center"><h:commandLink
+											styleClass="btn btn-success"
+											action="#{ordineController.svuotaCarrello()}" value="Svuota"
+											rendered="#{ordineController.valido}" /></td>
+								</tr>
+							</table>
+						</h:form>
+					</div>
+					<!--/panel-->
+				</div>
+				<!--/sidebar-->
 
+				<hr>
+				<footer>
+					<p>&copy; Company 2014</p>
+				</footer>
+			</div>
+			<!--/row-->
 		</div>
-		<!--/row-->
-		<hr>
-		<footer>
-			<p>&copy; Company 2014</p>
-		</footer>
 		<!--/.container-->
 		<!-- Bootstrap core JavaScript
     ================================================== -->

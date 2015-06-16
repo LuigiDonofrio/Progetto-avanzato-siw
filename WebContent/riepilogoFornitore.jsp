@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>BuyMentor - Riepilogo fornitore</title>
+<title>BuyMentor - Anagrafica fornitore</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,6 @@
 
 <body>
 	<f:view>
-		<!-- Fixed navbar -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -73,7 +72,7 @@
 							</div>
 							<div class="btn-group">
 								<h:panelGroup
-									rendered="#{utenteController.userLogged && utenteController.adminLogged}">>
+									rendered="#{utenteController.userLogged && utenteController.adminLogged}">
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -84,25 +83,28 @@
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newProduct.jsp'>
 											Aggiungi prodotto </h:outputLink></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/registraAmministratore.jsp'>
 											Registra nuovo Admin </h:outputLink></li>
-									<li class="divider"></li>
 									<li><h:outputLink
 											value='#{request.contextPath}/faces/newFornitore.jsp'>
 											Registra nuovo fornitore </h:outputLink></li>
+									<li class="divider" />
 									<li><h:commandLink
 											action="#{utenteController.ottieniClienti}"
 											value="Anagrafica Clienti" /></li>
-									<li class="divider"></li>
+									<li><h:commandLink
+											action="#{utenteController.ottieniClientiDaApprovare}"
+											value="Clienti da approvare" /></li>
+									<li class="divider" />
 									<li><h:commandLink
 											action="#{ordineController.ottieniOrdini}"
 											value="Tutti gli ordini" /></li>
 									<li><h:commandLink
 											action="#{ordineController.ottieniOrdiniNonEvasi}"
 											value="Ordini da evadere" /></li>
-									<li class="divider"></li>
+									<li class="divider" />
 									<li><h:commandLink action="#{loginController.logout}"
 											value="Logout" /></li>
 								</ul>
@@ -130,11 +132,33 @@
 							data-toggle="offcanvas">Toggle nav</button>
 					</p>
 					<div class="jumbotron">
-						<b>Nome fornitore</b>: ${fornitoreController.fornitore.name}<br>
-						<b>Partita IVA</b>:${fornitoreController.fornitore.p_iva}<br>
-						<b>Indirizzo</b>: ${fornitoreController.fornitore.indirizzo}<br>
-						<b>Telefono</b>: ${fornitoreController.fornitore.telefono}<br>
-						<b>Email</b>: ${fornitoreController.fornitore.email}<br>
+						<h2>${fornitoreController.fornitore.name} ${fornitoreController.fornitore.lastname}</h2>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Dettagli</h3>
+							</div>
+							<div class="panel-body">
+								<div>
+									<b>Nome:</b> ${fornitoreController.fornitore.name}
+								</div>
+								<div>
+									<b>Cognome:</b> ${fornitoreController.fornitore.lastname}
+								</div>
+								<div>
+									<b>Partita IVA:</b> ${fornitoreController.fornitore.p_iva}
+								</div>
+								<div>
+									<b>Indirizzo:</b> ${fornitoreController.fornitore.indirizzo}
+								</div>
+								<div>
+									<b>Telefono:</b> ${fornitoreController.fornitore.telefono}
+								</div>
+								<div>
+									<b>Email:</b> ${fornitoreController.fornitore.email}
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 

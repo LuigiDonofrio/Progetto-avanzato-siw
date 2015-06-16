@@ -2,6 +2,7 @@ package it.uniroma3.facade;
 
 import it.uniroma3.model.Amministratore;
 import it.uniroma3.model.Cliente;
+import it.uniroma3.model.Product;
 import it.uniroma3.model.Utente;
 
 import java.util.Date;
@@ -66,8 +67,7 @@ public class UtenteFacade {
 		List<Cliente> clienti = em.createQuery("select c From Cliente c where c.approvato=false").getResultList();
 		return clienti;
 	}
-
-
+	
 	public Cliente findCliente(Long id) {
 		return em.find(Cliente.class, id);
 	}

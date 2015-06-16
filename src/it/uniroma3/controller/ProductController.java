@@ -32,9 +32,6 @@ public class ProductController {
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession session = request.getSession();
 	
-	
-	
-	
 	public String getId_f() {
 		return id_f;
 	}
@@ -83,12 +80,11 @@ public class ProductController {
 	
 	public String listProducts() {
 		this.products = productFacade.getAllProducts();
-		return "products"; 
+		return "catalogo"; 
 	}
 
 	public String findProduct() {
 		this.product = productFacade.getProduct(id);
-
 		return "product";
 	}
 	
@@ -97,10 +93,10 @@ public class ProductController {
 		return "product";
 	}
 
-	public String findProductbyName() {
+	/*public String findProductbyName() {
 		this.products = productFacade.searchProductbyName(this.name);
-		return "products";
-	}
+		return "catalogo";
+	}*/
 	
 	public String aggiungiFornitori() {
 		this.allFornitori = productFacade.getAllFornitori();

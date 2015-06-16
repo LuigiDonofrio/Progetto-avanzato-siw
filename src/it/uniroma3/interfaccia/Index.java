@@ -17,7 +17,7 @@ public class Index {
 			.getCurrentInstance().getExternalContext().getRequest();
 	private HttpSession sessionUI = requestUI.getSession();
 
-	public String getMessage() {
+	/*public String getMessage() {
 
 		String messageWelcome = "/faces/loginUser.jsp";
 		String bottoneLog = "";
@@ -38,34 +38,29 @@ public class Index {
 					+ "/faces/registraCliente.jsp'> Registrati</a>";
 		}
 
-	}
-
+	}*/
+	
 	public String getCarrello() {
 		String htmlGenerated = "";
 		Ordine ordine = (Ordine) this.sessionUI.getAttribute("ordine");
 		if (ordine != null) {
-			htmlGenerated = "<div class=\"col-xs-6 col-sm-3 sidebar-offcanvas\" id=\"sidebar\">";
-			htmlGenerated = htmlGenerated
-					+ ("<div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\"><table width=\"100%\"><tr><td width=\"70%\">Carrello</td><td width=\"30%\" align=\"right\"><span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\" styl=\"float:right\"></span></td></tr></table></h3></div>");
-			htmlGenerated = htmlGenerated + ("<div class=\"panel-body\">");
-
 			for (OrderLine orderline : ordine.getOrderLines()) {
 				String nomeMaiusc = orderline.getProdotto().getName()
 						.substring(0, 1)
 						+ orderline.getProdotto().getName().substring(1);
 				htmlGenerated = htmlGenerated
-						+ ("<a href='#' class=\"list-group-item\"><table width=\"100%\"><tr><td width=\"70%\" align=\"center\" >"
+						+ ("<div class=\"list-group-item\"><table width=\"100%\"><tr><td width=\"70%\" align=\"center\" >"
 								+ nomeMaiusc + "</td><td><span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></td>");
 				htmlGenerated = htmlGenerated
 						+ ("<td align=\"center\" width=\"30%\">"
-								+ (orderline.getQuantita()) + "</td></tr></table></a>");
+								+ (orderline.getQuantita()) + "</td></tr></table></div>");
 
 			}
 		}
 		return htmlGenerated;
 	}
 
-	public String getRiepilogo() {
+	/*public String getRiepilogo() {
 		Ordine ordine = (Ordine) this.sessionUI.getAttribute("ordine");
 		String htmlGen = "";
 		System.out.println();
@@ -85,5 +80,5 @@ public class Index {
 		}
 
 		return htmlGen + "</table>";
-	}
+	}*/
 }
