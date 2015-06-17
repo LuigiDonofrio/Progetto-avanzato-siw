@@ -139,30 +139,30 @@
 								<h:outputLabel for="name">Nome</h:outputLabel>
 								<h:inputText value="#{productController.name}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il nome &#232 obbligatorio" id="name" />
+									requiredMessage="Il nome è obbligatorio" id="name" />
 								<h:message for="name" />
 							</div>
 							<div>
 								<h:outputLabel for="code">Codice</h:outputLabel>
 								<h:inputText value="#{productController.code}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il codice &#232 obbligatorio" id="code" />
+									requiredMessage="Il codice è obbligatorio" id="code" />
 								<h:message for="code" />
 							</div>
 							<div>
 								<h:outputLabel for="price">Prezzo</h:outputLabel>
 								<h:inputText value="#{productController.price}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il prezzo &#232 obbligatorio"
+									requiredMessage="Il prezzo è obbligatorio"
 									converterMessage="Il prezzo deve essere un numero" id="price" />
 								<h:message for="price" />
 							</div>
 							<div>
-								<h:outputLabel for="quantita">Quantit&#224</h:outputLabel>
+								<h:outputLabel for="quantita">Quantità</h:outputLabel>
 								<h:inputText value="#{productController.quantita}"
 									styleClass="form-control" required="true"
-									requiredMessage="La quantit&#224 &#232 obbligatorio"
-									converterMessage="La quantit&#224 deve essere un numero"
+									requiredMessage="La quantità è obbligatorio"
+									converterMessage="La quantità deve essere un numero"
 									id="quantita" />
 								<h:message for="quantita" />
 							</div>

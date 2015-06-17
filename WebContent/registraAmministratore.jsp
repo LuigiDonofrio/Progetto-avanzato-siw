@@ -139,14 +139,14 @@
 								<h:outputLabel for="username">Username</h:outputLabel>
 								<h:inputText value="#{utenteController.nickname}"
 									styleClass="form-control" required="true"
-									requiredMessage="L'username &#232 obbligatorio" id="username" />
+									requiredMessage="L'username è obbligatorio" id="username" />
 								<h:message for="username" />
 							</div>
 							<div>
 								<h:outputLabel for="password">Password</h:outputLabel>
 								<h:inputSecret value="#{utenteController.password}"
 									styleClass="form-control" required="true"
-									requiredMessage="La password &#232 obbligatoria"
+									requiredMessage="La password è obbligatoria"
 									validator="#{utenteController.supportValidatePassword}"
 									id="password" />
 								<h:message for="password" />
@@ -163,14 +163,14 @@
 								<h:outputLabel for="name">Nome</h:outputLabel>
 								<h:inputText value="#{utenteController.name}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il nome &#232 obbligatorio" id="name" />
+									requiredMessage="Il nome è obbligatorio" id="name" />
 								<h:message for="name" />
 							</div>
 							<div>
 								<h:outputLabel for="cognome">Cognome</h:outputLabel>
 								<h:inputText value="#{utenteController.lastname}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il cognome &#232 obbligatorio" id="cognome" />
+									requiredMessage="Il cognome è obbligatorio" id="cognome" />
 								<h:message for="cognome" />
 							</div>
 							<br>

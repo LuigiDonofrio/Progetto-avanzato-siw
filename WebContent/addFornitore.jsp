@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>BuyMentor - Aggiungi fornitori a prodotto</title>
+<title>BuyMentor - Fornitori</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -153,10 +153,13 @@
 											<td>${fornitore.name}</td>
 											<td>${fornitore.lastname}</td>
 											<td><h:commandLink styleClass="btn btn-success"
+													rendered="#{!productController.isFornitore(fornitore.id)}"
 													value="Aggiungi"
 													action="#{fornitoreController.addProdotto}">
 													<f:param name="id" value="#{fornitore.id}" />
-												</h:commandLink></td>
+												</h:commandLink> <h:outputText
+													rendered="#{productController.isFornitore(fornitore.id)}"
+													value="È fornitore" /></td>
 										</tr>
 									</c:forEach>
 								</table>

@@ -140,14 +140,14 @@
 								<h:outputLabel for="username">Username</h:outputLabel>
 								<h:inputText value="#{utenteController.nickname}"
 									styleClass="form-control" required="true"
-									requiredMessage="L'username &#232 obbligatorio" id="username" />
+									requiredMessage="L'username è obbligatorio" id="username" />
 								<h:message for="username" />
 							</div>
 							<div>
 								<h:outputLabel for="password">Password</h:outputLabel>
 								<h:inputSecret value="#{utenteController.password}"
 									styleClass="form-control" required="true"
-									requiredMessage="La password &#232 obbligatoria"
+									requiredMessage="La password è obbligatoria"
 									validator="#{utenteController.supportValidatePassword}"
 									id="password" />
 								<h:message for="password" />
@@ -164,21 +164,21 @@
 								<h:outputLabel for="name">Nome</h:outputLabel>
 								<h:inputText value="#{utenteController.name}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il nome &#232 obbligatorio" id="name" />
+									requiredMessage="Il nome è obbligatorio" id="name" />
 								<h:message for="name" />
 							</div>
 							<div>
 								<h:outputLabel for="cognome">Cognome</h:outputLabel>
 								<h:inputText value="#{utenteController.lastname}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il cognome &#232 obbligatorio" id="cognome" />
+									requiredMessage="Il cognome è obbligatorio" id="cognome" />
 								<h:message for="cognome" />
 							</div>
 							<div>
 								<h:outputLabel for="d_nascita">Data di nascita</h:outputLabel>
 								<h:inputText value="#{utenteController.dataNascita}"
 									styleClass="datepicker form-control" required="true"
-									requiredMessage="La data di nascita &#232 obbligatoria"
+									requiredMessage="La data di nascita è obbligatoria"
 									id="d_nascita" converterMessage="Formato: GG/MM/AAAA">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:inputText>
@@ -188,14 +188,14 @@
 								<h:outputLabel for="address">Indirizzo</h:outputLabel>
 								<h:inputText value="#{utenteController.address}"
 									styleClass="form-control" required="true"
-									requiredMessage="L'indirizzo &#232 obbligatorio" id="address" />
+									requiredMessage="L'indirizzo è obbligatorio" id="address" />
 								<h:message for="address" />
 							</div>
 							<div>
 								<h:outputLabel for="email">E-mail</h:outputLabel>
 								<h:inputText value="#{utenteController.email}"
 									styleClass="form-control" required="true"
-									requiredMessage="L'email &#232 obbligatoria" id="email" />
+									requiredMessage="L'email è obbligatoria" id="email" />
 								<h:message for="email" />
 							</div>
 							<br>

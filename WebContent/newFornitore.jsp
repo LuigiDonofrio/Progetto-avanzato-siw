@@ -139,14 +139,14 @@
 								<h:outputLabel for="name">Nome</h:outputLabel>
 								<h:inputText value="#{fornitoreController.name}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il nome &#232 obbligatorio" id="name" />
+									requiredMessage="Il nome è obbligatorio" id="name" />
 								<h:message for="name" />
 							</div>
 							<div>
 								<h:outputLabel for="cognome">Cognome</h:outputLabel>
 								<h:inputText value="#{fornitoreController.lastname}"
 									styleClass="form-control" required="true"
-									requiredMessage="Il cognome &#232 obbligatorio" id="cognome" />
+									requiredMessage="Il cognome è obbligatorio" id="cognome" />
 								<h:message for="cognome" />
 							</div>
 							<div>

@@ -59,7 +59,8 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +78,8 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -141,13 +143,13 @@
 										<th>Codice prodotto</th>
 										<th>Nome prodotto</th>
 										<th>Prezzo</th>
-										<th>Quantit&#224</th>
+										<th>Quantità</th>
 									</tr>
 									<c:forEach var="orderLine" items="${ordine.orderLines}">
 										<tr>
 											<td>${orderLine.prodotto.code}</td>
 											<td>${orderLine.prodotto.name}</td>
-											<td>${orderLine.prodotto.price}&#8364</td>
+											<td>${orderLine.prodotto.price} €</td>
 											<td>${orderLine.quantita}</td>
 										</tr>
 									</c:forEach>
