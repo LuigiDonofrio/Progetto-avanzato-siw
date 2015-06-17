@@ -59,7 +59,8 @@
 									<button type="button" class="btn btn-success dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -77,7 +78,8 @@
 									<button type="button" class="btn btn-primary dropdown-toggle"
 										data-toggle="dropdown" aria-expanded="false">
 										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${currentUser.name} ${currentUser.lastname} <span class="caret"></span>
+										${currentUser.name} ${currentUser.lastname} <span
+											class="caret"></span>
 									</button>
 								</h:panelGroup>
 								<ul class="dropdown-menu" role="menu">
@@ -158,13 +160,21 @@
 							</div>
 						</div>
 						<div>
-							<h:form>
+							<h:form rendered="#{utenteController.userLogged && !utenteController.adminLogged}">
 								<c:set scope="session" var="code"
 									value="${productController.product.code}" />
+								<h:outputLabel for="quantita">Quantità</h:outputLabel>
+								<h:inputText value="#{ordineController.quantita}"
+									styleClass="form-control" required="true"
+									requiredMessage="La quantità è obbligatorio"
+									converterMessage="La quantità deve essere un numero"
+									id="quantita" />
+								<h:message for="quantita" /><br>
 								<h:commandButton styleClass="btn btn-success"
-									rendered="#{utenteController.userLogged && !utenteController.adminLogged}"
 									action="#{ordineController.aggiungiProdotto(code)}"
 									value="Aggiungi al carrello" />
+							</h:form>
+							<h:form>
 								<h:commandButton styleClass="btn btn-success"
 									rendered="#{utenteController.userLogged && utenteController.adminLogged}"
 									action="#{productController.aggiungiFornitori}"

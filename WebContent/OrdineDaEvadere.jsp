@@ -138,36 +138,23 @@
 					<div class="jumbotron">
 						<h2>Riepilogo ordine</h2>
 						<h:form>
-							<div class="panel panel-default">
-								<table class="table">
-									<tr>
-										<th>Codice prodotto</th>
-										<th>Nome prodotto</th>
-										<th>Prezzo</th>
-										<th>Quantità</th>
-									</tr>
-									<c:forEach var="linea" items="#{ordineController.righe}">
-										<tr>
-											<td>${linea.prodotto.code}</td>
-											<td>${linea.prodotto.name}</td>
-											<td>${linea.prodotto.price}€</td>
-											<td>${linea.quantita}</td>
-										</tr>
-									</c:forEach>
-								</table>
-							</div>
 							<h:outputLabel for="d_evasione">Data di evasione</h:outputLabel>
-							<h:inputText value="#{ordineController.dataEvasione}"
-								styleClass="datepicker form-control" required="true"
-								requiredMessage="La data di evasione è obbligatoria"
-								id="d_evasione" converterMessage="Formato: GG/MM/AAAA">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText><br>
+								<h:inputText value="#{ordineController.dataEvasione}"
+									styleClass="datepicker form-control" required="true"
+									requiredMessage="La data di evasione è obbligatoria"
+									id="d_evasione" converterMessage="Formato: GG/MM/AAAA">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:inputText>
+								<h:message for="d_evasione" />
+							<br>
 							<h:commandButton styleClass="btn btn-success" value="Evadi"
 								action="#{ordineController.evadiOrdine}">
 								<f:param name="id" value="#{ordineController.ordine.id}" />
 							</h:commandButton>
+							<br>
 						</h:form>
+						<br>
+						${message}
 					</div>
 				</div>
 

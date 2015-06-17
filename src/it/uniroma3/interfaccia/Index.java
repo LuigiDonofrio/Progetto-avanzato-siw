@@ -59,25 +59,4 @@ public class Index {
 		}
 		return htmlGenerated;
 	}
-
-	/*public String getRiepilogo() {
-		Ordine ordine = (Ordine) this.sessionUI.getAttribute("ordine");
-		String htmlGen = "";
-		if (ordine != null) {
-			htmlGen = "<table width=\"100%\"><tr><td><b>Nome Prodotto<b></td><td><b>Quantita<b></td><td><b>Costo</td>";
-			for (OrderLine linea : ordine.getOrderLines()) {
-				htmlGen = htmlGen
-						+ "<tr><td width=\"70%\">"
-						+ linea.getProdotto().getName().substring(0, 1)
-								.toUpperCase()
-						+ linea.getProdotto().getName().substring(1) + "</td>"
-						+ "<td width=\"15%\" align=\"center\">"
-						+ linea.getQuantita() + "</td>" + "<td width=\"15%\">"
-						+ linea.getQuantita() * linea.getProdotto().getPrice()
-						+ "</td>" + "</tr>";
-			}
-		}
-
-		return htmlGen + "</table>";
-	}*/
 }

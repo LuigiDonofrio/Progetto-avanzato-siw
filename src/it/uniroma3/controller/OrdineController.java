@@ -25,7 +25,7 @@ public class OrdineController {
 	@ManagedProperty(value = "#{param.id}")
 	private Long id;
 	private String code;
-
+	private int quantita;
 	private String productCode;
 	private Ordine ordine;
 	private List<Ordine> ordini;
@@ -47,18 +47,30 @@ public class OrdineController {
 		return "allOrdini";
 	}
 
+	public int getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
+	}
+
 	public String svuotaCarrello() {
 		OrdineFacade.createOrdine();
 		return "";
 	}
-	
+
 	public String evadiOrdine() {
-		this.ordini = ordineFacade.evadiOrdine(this.id, dataEvasione);
-		return "index";
+		if (ordineFacade.evadiOrdine(this.id, dataEvasione) != null)
+			return "index";
+		String errore = ("<div class=\"alert alert-danger\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Errore:</span> Di uno o più prodotti non hai la quantità necessaria in magazzino!</div>");
+		this.request.setAttribute("message", errore);
+		return null;
 	}
 
 	public String aggiungiProdotto(String productCode) {
-		ordineFacade.aggiungiProdotto(productCode);
+		if (this.quantita != 0)
+			ordineFacade.aggiungiProdotto(productCode, this.quantita);
 		return "index";
 	}
 
@@ -72,13 +84,12 @@ public class OrdineController {
 		this.righe = ordineFacade.getRigheOrdine(this.ordine);
 		return "Ordine";
 	}
-	
+
 	public String findOrdineNonEvaso() {
 		this.ordine = ordineFacade.getOrdine(id);
 		this.righe = ordineFacade.getRigheOrdine(this.ordine);
 		return "OrdineDaEvadere";
 	}
-	
 
 	public List<Ordine> getOrdini() {
 		return ordini;
@@ -113,7 +124,7 @@ public class OrdineController {
 	public String getProductCode() {
 		return productCode;
 	}
-	
+
 	public void setProductCode(String product) {
 		this.productCode = product;
 	}
@@ -153,7 +164,7 @@ public class OrdineController {
 	public boolean isValido() {
 		Ordine ordine = (Ordine) this.session.getAttribute("ordine");
 		try {
-		return (ordine.getOrderLines().size() > 0);
+			return (ordine.getOrderLines().size() > 0);
 		} catch (Exception e) {
 			return false;
 		}

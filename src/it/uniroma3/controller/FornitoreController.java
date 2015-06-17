@@ -56,6 +56,7 @@ public class FornitoreController {
 		Product prod = (Product) this.session.getAttribute("prodottoCorrente");
 		Long id_prodottoCorrente = prod.getId();
 		this.fornitore = fornitoreFacade.aggiungiProdotto(this.id, id_prodottoCorrente);
+		
 		return "index";
 	}
 

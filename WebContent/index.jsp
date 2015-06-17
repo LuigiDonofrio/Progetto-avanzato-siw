@@ -135,6 +135,7 @@
 					<div class="jumbotron">
 						<h1>Benvenuto!</h1>
 						<p>Questa è la pagina iniziale.</p>
+						${message}
 					</div>
 				</div>
 

@@ -43,7 +43,7 @@ public class LoginController {
 				try {
 					Cliente cli = (Cliente) user;
 					if (!cli.isApprovato()) {
-						String errore = ("<div class=\"alert alert-warning\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Error:</span> Non sei stato ancora approvato: riprova più tardi o contatta un amministratore!</div>");
+						String errore = ("<div class=\"alert alert-warning\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Errore:</span> Non sei stato ancora approvato: riprova più tardi o contatta un amministratore!</div>");
 						this.request.setAttribute("message", errore);
 						return null;
 					}
@@ -51,7 +51,7 @@ public class LoginController {
 			this.session.setAttribute("currentUser", user);
 			this.request.setAttribute("message", null);
 		} else {
-			String errore = ("<div class=\"alert alert-danger\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Error:</span> Hai inserito dei dati di login errati: riprova o registrati!</div>");
+			String errore = ("<div class=\"alert alert-danger\" role=\"alert\"><span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span><span class=\"sr-only\">Errore:</span> Hai inserito dei dati di login errati: riprova o registrati!</div>");
 			this.request.setAttribute("message", errore);
 			return null;
 		}

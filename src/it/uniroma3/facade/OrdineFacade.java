@@ -37,13 +37,13 @@ public class OrdineFacade {
 		return ordine;
 	}
 
-	public void aggiungiProdotto(String prodCode) {
+	public void aggiungiProdotto(String prodCode, int quantita) {
 		Ordine ordine = (Ordine) this.session.getAttribute("ordine");
 		if (ordine.getDataApertura() == null)
 			ordine.setDataApertura(new Date());
 		for (OrderLine orderline : ordine.getOrderLines()) {
 			if (orderline.getProdotto().getCode().equals(prodCode)) {
-				orderline.setQuantita(orderline.getQuantita() + 1);
+				orderline.setQuantita(orderline.getQuantita() + quantita);
 				return;
 			}
 		}
@@ -51,7 +51,7 @@ public class OrdineFacade {
 				.createQuery("select u from Product u where u.code=:code")
 				.setParameter("code", prodCode).getResultList();
 
-		OrderLine orderline = new OrderLine(product.get(0), 1);
+		OrderLine orderline = new OrderLine(product.get(0), quantita);
 		orderline.setOrdine(ordine);
 		ordine.addLinea(orderline);
 	}
@@ -103,28 +103,29 @@ public class OrdineFacade {
 
 	public List<Ordine> evadiOrdine(long id, Date date) {
 		Ordine ordine = em.find(Ordine.class, id);
-
 		List<OrderLine> orderlines = this.getRigheOrdine(ordine);
+		boolean valido = true;
 
 		for (OrderLine orderline : orderlines) {
 			Product prod = em.find(Product.class, orderline.getProdotto()
 					.getId());
-			if (prod.getQuantita() >= orderline.getQuantita()) {
-				prod.setQuantita(prod.getQuantita() - orderline.getQuantita());
-				em.merge(prod);
-			} else {
-				// String errore =
-				// "E' stato impossibile evadere l'ordine, controlla la quantità";
-				// this.session.setAttribute("errQuant", errore);
-				return this.findAllOrdiniNonEvasi();
+			if (prod.getQuantita() < orderline.getQuantita()) {
+				valido = false;
+				return null;
+			}
+		}
+		
+		if (valido) {
+			for (OrderLine line : orderlines) {
+				Product p = em.find(Product.class, line.getProdotto().getId());
+				p.setQuantita(p.getQuantita() - line.getQuantita());
+				em.merge(p);
 			}
 		}
 
 		ordine.setDataEvasione(date);
 		ordine.setStatus(1);
 
-		em.merge(ordine);
 		return this.findAllOrdiniNonEvasi();
 	}
-
 }
